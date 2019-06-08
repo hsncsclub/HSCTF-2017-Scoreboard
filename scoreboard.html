@@ -1,0 +1,1157 @@
+<html style="padding: 0px 40px;">
+	<head>
+		<title>HSCTF – Scoreboard</title>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.9.0/vis.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+		<script async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script>
+			function dismissNotification(id) {
+				api.makeCall("/dismiss/" + id + ".json", {_csrf_token: "eklaxwrfbteyrh0og9zd28rex039drhn8u2vj24nijapndhc87c9030xf99qw6vd"}, function() {
+					$("#notification" + id).slideUp();
+				});
+			}
+		</script>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<style type="text/css">.teamrow:not(.visible){display:none;}.teamrow.ineligible{color:#888;}</style>
+		<script>
+			var ineligibleShown = false;
+			function recalcRanks() {
+				$(".teamrow.visible").each(function(i, x) {
+					$(x).children(".rank").html(i + 1);
+				});
+			}
+			function hideIneligible() {
+				$(".teamrow.ineligible").removeClass("visible");
+				$("#toggle").html("Show ineligible teams");
+				recalcRanks();
+			}
+			function showIneligible() {
+				$(".teamrow.ineligible").addClass("visible");
+				$("#toggle").html("Hide ineligible teams");
+				recalcRanks();
+			}
+			function toggleIneligible() {
+				if(ineligibleShown) hideIneligible();
+				else showIneligible();
+				ineligibleShown = !ineligibleShown;
+			}
+			document.onready = function() {
+				hideIneligible();
+			}
+		</script>
+	</head>
+	<body class="competition-page">
+		<div>
+		</div>
+		<div class="cont">
+			<h3>Rankings</h3>
+			<a href="javascript:toggleIneligible()" id="toggle">Show ineligible teams</a>
+			<table>
+				<thead>
+					<tr><th>Rank</th><th>Team</th><th>Affiliation</th><th>Score</th></tr>
+				</thead>
+				<tbody>
+					<tr class="teamrow eligible visible"><td class="rank">1</td><td>Producing Perfection</td><td>Poolesville High School</td><td>9150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">2</td><td>parse it up</td><td>TJHSST</td><td>8850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">3</td><td>Hackademia</td><td>PHS + BCA + OPRF + PWS</td><td>8750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">4</td><td>Overkill by default</td><td>Cherry Creek High School</td><td>8050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">5</td><td>pentacontagons</td><td>Richard Montgomery High School</td><td>7850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">6</td><td>hsctf is cancer</td><td>mbhs</td><td>7550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">7</td><td>F0 0F C7 C8</td><td>Plano West Senior High School + Texas Academy of Math and Science</td><td>7450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">8</td><td>DevsTroll</td><td>University of Science, VNU-HCM</td><td>6950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">8</td><td>Diesel Locomotive</td><td>Liberal Arts and Science Academy</td><td>6950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">10</td><td>hanto</td><td>UCLA</td><td>6950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">9</td><td>SFHS Team C</td><td>Spring-Ford Senior High School</td><td>6850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">10</td><td>Y33t</td><td>Richardson High School</td><td>6850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">13</td><td>lessthan3.kaonashi</td><td>UIT</td><td>6750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">14</td><td>pernicious</td><td>No affiliation</td><td>6650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">11</td><td>5 EXploiters</td><td>High Technology High School</td><td>6650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">12</td><td>MemeDream</td><td>Plano West Senior High School</td><td>6250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">13</td><td>n00bCTF</td><td>West Windsor-Plainsboro High School South</td><td>6250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">14</td><td>b1c</td><td>Takoma Park Middle School</td><td>6150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">19</td><td>No</td><td>No affiliation</td><td>5950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">15</td><td>Null</td><td>Chantilly Academy</td><td>5850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">21</td><td>TYGN</td><td>University of Science, VNU-HCM</td><td>5850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">16</td><td>unlimited reagents</td><td>Bergen County Academies</td><td>5750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">17</td><td>phsst</td><td>PHS + TJHSST + NCHS</td><td>5750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">24</td><td>No Hope</td><td>University of Science, VNU-HCM</td><td>5350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">18</td><td>Flaming Tigers</td><td>LHS+MHS+GWHHS</td><td>4950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">19</td><td>th3 p0t83s</td><td>Quincy Senior High</td><td>4850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">27</td><td>liberum veto</td><td>I Liceum Ogólnokształcące im. Stanisława Staszica w Lublinie</td><td>4750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">20</td><td>The Safe Space</td><td>Richardson High School</td><td>4350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">21</td><td>\x00rnithological \x00rnithologists</td><td>High Technology High School</td><td>4150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">30</td><td>hihi</td><td>No affiliation</td><td>4150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">31</td><td>HIS</td><td>UIT</td><td>4050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">22</td><td>PHSCRC</td><td>Princeton High School</td><td>3950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">33</td><td>Digital Dragons</td><td>Beijing National Day School</td><td>3950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">23</td><td>Potential Parayeets</td><td>Montgomery Blair High School</td><td>3950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">24</td><td>Literal Dips</td><td>Doral Academy Charter High School</td><td>3850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">36</td><td>return to_sleep;</td><td>West Windsor-Plainsboro High School North</td><td>3750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">37</td><td>GeoGeoGeoGeoGeoGeoGeo</td><td>hmm</td><td>3550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">25</td><td>SocietyOfEntropy</td><td>Westminster School</td><td>3550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">39</td><td>MOzaReLlA</td><td>UIT</td><td>3550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">40</td><td>VPA Team 5</td><td>WW-P High School North</td><td>3550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">41</td><td>VALUE</td><td>UIT</td><td>3450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">42</td><td>Cosmos</td><td>Fuck the whole universe</td><td>3150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">26</td><td>dcua-school</td><td>No affiliation</td><td>3150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">44</td><td>Snake Squad</td><td>WWP North</td><td>3150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">27</td><td>TECHnician</td><td>Charter School of Wilmington</td><td>3150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">28</td><td>Pwn3r</td><td>Wellesley High School</td><td>3050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">47</td><td>rm -rf [enter]</td><td>TheGuyFawkes</td><td>3050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">48</td><td>ahihi</td><td>UIT CTF ANTT</td><td>3050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">29</td><td>Enigma</td><td>McQuaid Jesuit High School</td><td>2950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">50</td><td>Nope</td><td>University of Information Technology</td><td>2950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">30</td><td>Buddos, Inc.</td><td>Durham Academy</td><td>2950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">31</td><td>J2TeaM</td><td>J2TeaM</td><td>2850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">32</td><td>The Lemons</td><td>Methacton High School</td><td>2850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">54</td><td>bmtd</td><td>No affiliation</td><td>2800</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">55</td><td>It's In the Metadata</td><td>San Luis Obispo High School</td><td>2750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">33</td><td>The Exceptions</td><td>Menlo School</td><td>2750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">57</td><td>A</td><td>No affiliation</td><td>2750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">34</td><td>N.E.R.D.</td><td>Lindenhurst High School</td><td>2750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">35</td><td>the respath</td><td>Bergen County Academies</td><td>2750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">36</td><td>CS Gods</td><td>WWP High School South</td><td>2750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">61</td><td>CrusheRS</td><td>No affiliation</td><td>2700</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">37</td><td>Peter Math Clan</td><td>St. John's Preparatory School</td><td>2650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">38</td><td>Mom's Spaghetti</td><td>Pine Crest School</td><td>2650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">64</td><td>I Hate Mondays</td><td>West Windsor-Plainsboro High School North</td><td>2650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">39</td><td>Algorithmic Armadillos</td><td>West Windsor-Plainsboro High School South</td><td>2650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">40</td><td>Los Pollos Hermanos</td><td>Poolesville High School</td><td>2650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">41</td><td>DragonTech</td><td>Maggie L. Walker Governor's School</td><td>2550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">42</td><td>1 and 0nly</td><td>TJHSST</td><td>2450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">69</td><td>Team IA</td><td>FPT University</td><td>2450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">70</td><td>^bit10</td><td>No affiliation</td><td>2450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">71</td><td>1234</td><td>UIT</td><td>2450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">43</td><td>0x539</td><td>Great Neck South High School</td><td>2450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">44</td><td>Patrick's Peasants</td><td>MBHS</td><td>2450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">74</td><td>Mast3rHack3rz</td><td>WWP High School North</td><td>2450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">75</td><td>Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx Cx</td><td>Camberwell Grammar School</td><td>2350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">76</td><td>LFlare Army</td><td>Singapore Polytechnic</td><td>2350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">45</td><td>RindgeCringe</td><td>Cambridge Rindge and Latin School</td><td>2350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">78</td><td>n2x0bz</td><td>Batory High School (Chorzów, Poland)</td><td>2150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">46</td><td>WinDogeT3n</td><td>John P Stevens</td><td>2150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">80</td><td>Blue Little Sky</td><td>UTSA</td><td>2150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">47</td><td>Antikythera</td><td>Troy High School</td><td>2150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">48</td><td>??::?:;</td><td>Lindenhurst High School</td><td>2150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">49</td><td>MRBST</td><td>Lincoln Southeast High School</td><td>2050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">84</td><td>UIT.Public</td><td>qwert</td><td>2050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">50</td><td>a(){System.out.print("Recursive Neckbeard"); a();}</td><td>Monte Vista High School</td><td>2050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">51</td><td>SyoHacks</td><td>Syosset High School</td><td>2050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">52</td><td>P69 Ruby Samurai</td><td>Quabbin Regional High School</td><td>2050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">53</td><td>pThunder</td><td>Thomas S. Wootton High School</td><td>2050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">89</td><td>pikalong</td><td>No affiliation</td><td>2050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">90</td><td>dankSquad</td><td>No affiliation</td><td>2000</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">54</td><td>Plátano Power ウィーナードッグ</td><td>Quabbin Regional High School</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">55</td><td>SoloPaiMan</td><td>Bergen County Academies</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">56</td><td>Cameron's Virus</td><td>Vestal High School</td><td>1950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">94</td><td>bugs_bunny</td><td>cho</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">57</td><td>Weenie Hut Seniors</td><td>Nashua High School North</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">58</td><td>marksutaki</td><td>Durham Academy</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">59</td><td>Dark Human Squad</td><td>poolesville/richard montgomery</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">60</td><td>Weenie Hut Juniors</td><td>Nashua High School North</td><td>1950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">61</td><td>The Bottom 1%</td><td>Poolesville High School</td><td>1850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">62</td><td>AHS Lions 1</td><td>Ambassador High School</td><td>1850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">101</td><td>3XpL01t5 NSC</td><td>NaijaSecForce</td><td>1850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">102</td><td>TheNewbie</td><td>University of Science, VNU-HCM</td><td>1850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">103</td><td>HCMUS-Hello World</td><td>University of Science, VNU-HCM</td><td>1850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">104</td><td>H.I.S</td><td>U.I.T</td><td>1800</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">105</td><td>urani238</td><td>No affiliation</td><td>1750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">63</td><td>PVHS CTF</td><td>Palos Verdes High School</td><td>1750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">64</td><td>hcrd</td><td>Hinsdale Central (IL) + Middletown (DE) + New Rochelle (NY)</td><td>1750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">65</td><td>troypracticeteam</td><td>Troy High School</td><td>1750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">66</td><td>Davie's Angels</td><td>St. Johns Prep</td><td>1750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">67</td><td>JAB</td><td>No affiliation</td><td>1750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">68</td><td>Backdoor Labs</td><td>Holland Christian High School</td><td>1750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">112</td><td>j0kerZ</td><td>No affiliation</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">69</td><td>PentaHex</td><td>Del Norte High School</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">70</td><td>VapidCode</td><td>No affiliation</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">71</td><td>DIO</td><td>St. John's Preparatory School</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">72</td><td>DarkIsBright</td><td>Marlboro High School</td><td>1650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">117</td><td>BTC</td><td>UIT-MMTT2015</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">73</td><td>Pendergast and the Kellys</td><td>Buckingham Browne &amp; Nichols</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">74</td><td>FalconsOutOfRange</td><td>CRLS</td><td>1650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">120</td><td>NAVTEC</td><td>WWP-North</td><td>1650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">75</td><td>Infinite While Loop</td><td>Durham Academy</td><td>1650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">122</td><td>hsctf170010vn</td><td>HCMC University of Science</td><td>1650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">123</td><td>None</td><td>No affiliation</td><td>1550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">76</td><td>Tech-21</td><td>No affiliation</td><td>1550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">77</td><td>The Hills We Travel</td><td>Hamburg High School</td><td>1550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">126</td><td>Ponyo</td><td>WWP-North</td><td>1550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">127</td><td>Bhavani</td><td>WWPHSN</td><td>1550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">78</td><td>Team Catatonic</td><td>North Hollywood High School</td><td>1450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">79</td><td>ughhh</td><td>MBHS</td><td>1450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">80</td><td>Tiki Techs</td><td>Kealakehe High School</td><td>1450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">131</td><td>Avocado2861</td><td>West Windsor-Plainsboro High School North</td><td>1450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">81</td><td>WhatAHack</td><td>Kentwood</td><td>1450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">82</td><td>Middlesex</td><td>Middlesex School</td><td>1450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">134</td><td>Team TripleFeed</td><td>WWP-North</td><td>1450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">135</td><td>The Bingo Bango Bunch</td><td>WWP - High School North</td><td>1450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">83</td><td>Freedom Fighters</td><td>FHS</td><td>1450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">137</td><td>github.com/aaronhyperum</td><td>Singapore American School</td><td>1450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">138</td><td>Iwearfakeronin</td><td>WWP - High School North</td><td>1450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">139</td><td>HogwartzNY</td><td>Hudson school of witchcraft and wizardry</td><td>1400</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">84</td><td>*NULL</td><td>Darien High School</td><td>1350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">85</td><td>Deus Vult</td><td>Martin Luther King High School</td><td>1350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">142</td><td>kotori</td><td>No affiliation</td><td>1350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">86</td><td>Alan's Gavel</td><td>Sewickley Academy</td><td>1350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">87</td><td>NotAnyPenguin</td><td>St John's Prep</td><td>1350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">145</td><td>Slightly Above Average</td><td>West Windsor - Plainsboro High School North</td><td>1350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">146</td><td>King Kong's Jungle</td><td>West Windsor-Plainsboro High School North</td><td>1350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">88</td><td>weivekaL</td><td>School (Lakeview Technology Academy)</td><td>1350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">148</td><td>Crack37</td><td>PTIT</td><td>1350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">149</td><td>n0Sk!LL</td><td>UET_NEWBIE</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">150</td><td>KhangGod</td><td>No affiliation</td><td>1250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">89</td><td>HackStreetBoyz</td><td>Montpelier High School</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">152</td><td>Unlimited</td><td>UIT</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">153</td><td>Solo</td><td>Camberwell Grammar School</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">154</td><td>harvard</td><td>WWP - High School North</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">155</td><td>Nitzan</td><td>-</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">156</td><td>zst123</td><td>Nanyang Polytechnic</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">157</td><td>DNS Destroyers</td><td>Troy High School</td><td>1250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">158</td><td>BillyBobJoe</td><td>No affiliation</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">90</td><td>The Beasts</td><td>Thomas S. Wootton High School</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">91</td><td>Wootton Hack Club</td><td>Thomas S. Wootton High School</td><td>1150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">161</td><td>WD-40</td><td>N/A</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">92</td><td>JKS</td><td>Brentwood School</td><td>1150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">163</td><td>D-fuse</td><td>Naijasec School</td><td>1150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">164</td><td>Owleyes Team</td><td>NSIS</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">93</td><td>KAZC</td><td>Liberal Arts and Science Academy</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">94</td><td>mymindstorm</td><td>"); DROP TABLE TEAMS;--</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">95</td><td>Pseudoers</td><td>The Nueva School</td><td>1150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">168</td><td>_ABCD</td><td>No affiliation</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">96</td><td>Fidget Spinners</td><td>Sussex County Technical Highschool</td><td>1150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">170</td><td>CP++</td><td>Central Peel Secondary School</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">97</td><td>Lit Boys</td><td>Noblesville High School</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">98</td><td>ArnoldC++</td><td>Darien High School</td><td>1150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">99</td><td>JCIB ForensX</td><td>Jefferson County International Baccalaureate</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">100</td><td>CluelESS</td><td>Poolesville High School</td><td>1050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">175</td><td>Russian Hackers</td><td>Camberwell Grammar School</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">101</td><td>AwesomeDoggySquad</td><td>Morris County School of Technology</td><td>1050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">177</td><td>PH-KD</td><td>PH-KD</td><td>1050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">178</td><td>Team1</td><td>No affiliation</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">102</td><td>Hax</td><td>Lake Braddock Secondary School</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">103</td><td>BNB</td><td>Durham Academy</td><td>1050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">181</td><td>Bonnolly's BonBuerors</td><td>WW-P North</td><td>1050</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">182</td><td>Dr. Ortiz</td><td>No affiliation</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">104</td><td>seaBassDragons</td><td>Durham Academy</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">105</td><td>GetMosherd</td><td>Warren Hills High School</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">106</td><td>Salt</td><td>Hamburg High School</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">107</td><td>Team Tu</td><td>WW-P HSN</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">108</td><td>C4KE</td><td>Hamburg High School</td><td>1050</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">109</td><td>Supreme Meme Team</td><td>Kalamazoo Area of Math and Science Center</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">189</td><td>NOV(AC)^2</td><td>Northern Virginia Community College</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">110</td><td>This Is Your First Warning</td><td>Yeshiva Institute of Technology</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">111</td><td>Lack of a Better Name</td><td>WWP High School South</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">112</td><td>MD Hack Club II</td><td>Thomas S. Wootton High School</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">113</td><td>MCST Dictators</td><td>MCVTS</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">114</td><td>Bush Squirrel PeARLS</td><td>Springfield Township High School</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">195</td><td>Mr. K</td><td>Waterford Mott</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">115</td><td>Byte Me</td><td>Burnsville High School</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">116</td><td>Chocolate Bars</td><td>No affiliation</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">117</td><td>BRK-110100100</td><td>St. John's Prep</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">199</td><td>Bolu Meranti Rasa Serikaya</td><td>No affiliation</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">118</td><td>Scr0wen</td><td>Quabbin Regional High School</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">201</td><td>Aardvark</td><td>West Windsor-Plainsboro High School North</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">119</td><td>PioNerds</td><td>Simi Valley high school</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">203</td><td>Mom I Got Into Harvard</td><td>WW-P High School North</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">120</td><td>JEN</td><td>Greenwich Academy</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">121</td><td>Intel© Octo-Core i8 Atom Pentium Xeon Processor</td><td>Lindenhurst High School</td><td>950</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">122</td><td>JMHS</td><td>James Madison High School</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">207</td><td>Foxtrot Tango Whiskey</td><td>West Windsor Plainsboro Highschool North</td><td>950</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">208</td><td>BurningBits</td><td>Hudson Valley High</td><td>900</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">209</td><td>kook</td><td>UCLA</td><td>850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">210</td><td>4T34m</td><td>No affiliation</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">123</td><td>ArtisanChocobutterpeaskimsoyMilkMilkMilkMilkMilk</td><td>Poolesville High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">124</td><td>Platzhalter</td><td>Cherry Creek High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">125</td><td>Harmonious Repose</td><td>Loyola Blakefield</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">126</td><td>Wumbology: The Study of Wumbo</td><td>WW-P South</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">127</td><td>ViewersIsland</td><td>Wellesley High School</td><td>850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">216</td><td>HVNGROUPS</td><td>No affiliation</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">128</td><td>Backdoor Bashers</td><td>Burnsville High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">129</td><td>csquared</td><td>Diamond Bar High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">130</td><td>Operation Otto</td><td>Burnsville High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">131</td><td>ECRCHS</td><td>El Camino Real Charter High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">132</td><td>The Dimmsdale Dimmadomes</td><td>Quabbin Regional High School</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">133</td><td>water boys</td><td>WWP South</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">134</td><td>what in computation</td><td>Durham Academy</td><td>850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">224</td><td>k20dtu</td><td>k20dtu</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">135</td><td>Core Exercises</td><td>No affiliation</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">136</td><td>Team Omniscience</td><td>South High School (Cyber Patriots)</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">137</td><td>DeutschlandUeberAlles</td><td>WW-P South</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">138</td><td>Trenton Codes 2k17</td><td>West Windsor-Plainsboro South</td><td>850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">229</td><td>Sorcerer</td><td>University of Science</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">139</td><td>APCS Hackerz Rox &lt;3</td><td>Greenwich Academy</td><td>850</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">231</td><td>#itout</td><td>West Windsor-Plainsboro High School North</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">140</td><td>xXx_h4cK3r_M3N_xXx</td><td>Cedarburg School District</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">141</td><td>BEAN SQUAD</td><td>FourBeansInAPod</td><td>850</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">142</td><td>Penguin</td><td>Montgomery Blair High School</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">235</td><td>KiritoQN</td><td>Nong Lam Tu</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">143</td><td>Camels</td><td>No affiliation</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">144</td><td>Jayden Bulexa</td><td>No affiliation</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">238</td><td>Winaz</td><td>NSF</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">239</td><td>ys20GG</td><td>ys20GG</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">240</td><td>Moisturizers</td><td>WW-P High School North</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">145</td><td>Floppy Code</td><td>Burnsville High School</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">146</td><td>Virginia and Cam's Baller Squad</td><td>Durham Academy</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">147</td><td>b2c</td><td>Takoma Park Middle School</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">148</td><td>LexHSCS2017</td><td>Lexington High School</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">245</td><td>cF0rc3</td><td>NaijaSecForce</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">149</td><td>¯\_(ツ)_/¯</td><td>Nashua High School North</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">247</td><td>Kobayashi-san</td><td>Kobayashi-san</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">150</td><td>$$Cash$$</td><td>West Windsor Plainsboro High School North</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">151</td><td>Eric</td><td>WWPHS South</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">152</td><td>Columbus Academy</td><td>Columbus Academy</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">153</td><td>This ain't van gogh, this is migo</td><td>WWPHSS</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">154</td><td>Hackstreet Boys</td><td>WW-P North</td><td>750</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">253</td><td>ScrubClub</td><td>West Windsor Plainsboro High School North</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">155</td><td>HeavensArena</td><td>No affiliation</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">156</td><td>Batman</td><td>Warren Hills Regional High School</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">157</td><td>X tentacion is respectful</td><td>Lick-Wilmerding</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">158</td><td>rip the dream</td><td>Carmel High School</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">159</td><td>Electric Locomotive</td><td>Liberal Arts and Science Academy</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">160</td><td>brain.exe does not exist</td><td>Manhattan High School</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">161</td><td>Fuel Cell Locomotive</td><td>Liberal Arts and Science Academy</td><td>750</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">162</td><td>Random</td><td>Carmel High School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">163</td><td>Aaerinx</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">263</td><td>Clouds</td><td>Brothers</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">264</td><td>N.G.U</td><td>UIT HCMC</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">265</td><td>anhkinhcan</td><td>Hi</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">164</td><td>Cyber Squad (Landon School)</td><td>Landon School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">165</td><td>a';DROP TABLE users;</td><td>Ward Melville High School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">268</td><td>Mazino</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">166</td><td>finalVoid</td><td>North Olmsted High School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">167</td><td>Team Name</td><td>Burnsville High School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">168</td><td>KOOL AIDS</td><td>50</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">169</td><td>Can't Fold</td><td>Bville</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">273</td><td>HSCTF</td><td>HSCTF</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">274</td><td>denhoten</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">170</td><td>Toasty T's</td><td>Nashua High School North</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">171</td><td>roblox glitches (STILL WORKS!)(FACE REVEAL)</td><td>Video Game High School!!!!1!!</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">277</td><td>MissMaleRabbit</td><td>UIT</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">172</td><td>KAMSC_Hackers</td><td>Kalamazoo Area Mathematics and Science Center</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">173</td><td>Cicada 3301</td><td>Del Val Highschool and family</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">174</td><td>code-blooded</td><td>Burnsville High School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">281</td><td>Keyboard Ninjas</td><td>WWP-North</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">282</td><td>Mmmmmm... Donuts!</td><td>West Morris Central HS</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">175</td><td>Whatever you would like to call it</td><td>Rogers High School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">176</td><td>The Lone Wolf</td><td>The coolest dude to ever dude, dude</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">177</td><td>RHYTHM</td><td>Rogers High School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">286</td><td>The Zesty Ranchers</td><td>Bev Facey High School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">287</td><td>//TODO: Team Name</td><td>Woodie Kamen</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">178</td><td>sneak-a-hack</td><td>South High CyberPatriots</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">179</td><td>KEITH WHY?</td><td>Springfield Township School District</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">290</td><td>CHIBI</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">180</td><td>tripleS(JV)</td><td>South High CyberPatriots</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">181</td><td>Get_Robbed Inc.</td><td>Warren Hills Regional High School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">182</td><td>Saturdays are for the boys</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">294</td><td>alberniarmada</td><td>School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">295</td><td>Zichron</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">183</td><td>Slackers</td><td>Nashua High School North</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">184</td><td>exploder coders</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">185</td><td>Math.sqrt(int)</td><td>Raritan High School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">299</td><td>OnlyConnolly</td><td>No affiliation</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">186</td><td>Maishwarya</td><td>School</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">301</td><td>Show Stoppers</td><td>WWP-North</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">187</td><td>Bleo ByeDom</td><td>Durham Academy</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">188</td><td>Open The Fire Escape</td><td>Warren Hills Regional High School</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">189</td><td>SupremeMeme</td><td>Lakeview Technology Academy</td><td>650</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">305</td><td>Delta</td><td>WW-P Highschool North</td><td>650</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">190</td><td>6</td><td>9</td><td>600</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">307</td><td>Kreative Koders</td><td>Purdue University</td><td>600</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">308</td><td>CS10</td><td>No affiliation</td><td>600</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">191</td><td>C:\Users\Root</td><td>Deep Run High School</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">310</td><td>-.-</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">192</td><td>Section 31</td><td>Faith Lutheran High School</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">312</td><td>Cons</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">193</td><td>StogaTall</td><td>Conestoga High School</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">194</td><td>cyber101</td><td>Troy High School</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">315</td><td>Hello World!</td><td>UIT</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">195</td><td>Dumb Asians</td><td>Morris County School of Technology</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">196</td><td>Rebel Alliance</td><td>https://www.christianmingle.com/?prm=95737&amp;lgid=[christianmingle]&amp;seff=c&amp;medium=tsa&amp;atrkid=V3ADW52A4</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">197</td><td>Unicorn Swagger</td><td>Freedom High School</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">319</td><td>TheOnlyOne</td><td>Freedom High School</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">320</td><td>Buzz3d</td><td>Georgia Tech</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">198</td><td>The Fighting Mongooses</td><td>Glen Ridge High School</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">199</td><td>D1V3RS17Y</td><td>Kentwood High School</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">200</td><td>PacMan_2.0</td><td>Del Val</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">201</td><td>Javaginas</td><td>Lakeview Technology Academy</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">325</td><td>dropDown</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">326</td><td>HSG</td><td>Bkav</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">327</td><td>I love Josiah</td><td>DEA</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">328</td><td>Space Jam</td><td>Bev Facey</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">329</td><td>Llama$4Lif3</td><td>Bev Facey</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">202</td><td>Turner Burners</td><td>TJHSST</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">203</td><td>Bad at CTF</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">332</td><td>CTFsAreFun</td><td>N/A</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">333</td><td>Ayy</td><td>N/A</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">204</td><td>megbert's_pixie_sticks</td><td>Greenwich Academy</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">205</td><td>Mission Failed We'll Get 'Em Next Time</td><td>West Windsor Plainsboro High School South</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">206</td><td>Sol[0]</td><td>Mountain View High School</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">207</td><td>WWP Girls Golf 2017</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">208</td><td>400Poundz-1337h4x0rz</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">209</td><td>What's the big (A)dil?</td><td>Easton Area High School</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">210</td><td>609</td><td>WW-P High School South</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">211</td><td>Double K(ill)</td><td>Durham Academy</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">212</td><td>Single AP</td><td>High School North</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">213</td><td>Nulllllllllllllllllll</td><td>Troy High School</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">344</td><td>Cool Team</td><td>West Windsor-Plainsboro High School North</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">345</td><td>alex800</td><td>High School North</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">214</td><td>The Meme Team</td><td>Kentwood Highschool</td><td>550</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">347</td><td>HVH</td><td>No affiliation</td><td>550</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">215</td><td>Grill</td><td>Laurel School</td><td>500</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">216</td><td>C--</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">350</td><td>Li 7wak</td><td>-</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">351</td><td>OnionSellers</td><td>AFSA High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">217</td><td>happi</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">218</td><td>CyberTigers</td><td>Valencia High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">219</td><td>Blue</td><td>Lausanne</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">355</td><td>Tentacles</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">356</td><td>LEI</td><td>UIT</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">220</td><td>SSTCTF</td><td>School of Science and Technology</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">221</td><td>Team YNI</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">222</td><td>Choice</td><td>Bronx High School of Science</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">360</td><td>R311</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">223</td><td>Bath Binary</td><td>Bath Highschool</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">224</td><td>Senioritis</td><td>WW-P High School South</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">225</td><td>Commerce Kids</td><td>Sussex County Technical High School</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">364</td><td>Quaker Hackers</td><td>Pickering College</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">226</td><td>CobblestoneMonarchy</td><td>Cranford High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">227</td><td>Debuggers Not Huggers</td><td>Brookstone School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">228</td><td>team name</td><td>school</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">229</td><td>Thomas &amp; Friends</td><td>Quabbin Regional High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">230</td><td>Lanky Luke's Army</td><td>Bergen County Academies</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">231</td><td>*VOID</td><td>Darien High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">232</td><td>Saint Brendan High C^3</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">233</td><td>Saint Brendan High School C^3+1</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">234</td><td>Who's Even Trying Right Now</td><td>Waterford Mott High School</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">374</td><td>Whale Fortress</td><td>Cedarburg High School</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">375</td><td>AllSeeing</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">235</td><td>hottest party in town</td><td>West Windsor-Plainsboro High School South</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">236</td><td>Zura janai, Katsura da!</td><td>School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">237</td><td>L*J^2</td><td>Thomas Jefferson High School (PA)</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">238</td><td>SaltyFoodMakers</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">239</td><td>VII</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">240</td><td>SqueeSquad</td><td>WWPHSN</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">382</td><td>WestWindia-PlasianboroHighSchoolSouthOfTheBorder</td><td>WW-P High School South</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">241</td><td>CyberCentral</td><td>West Morris Central High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">242</td><td>CodingGOATs</td><td>Centennial High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">243</td><td>Hanzo Mains</td><td>WWP High School South</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">244</td><td>Julia and Neil</td><td>Durham Academy</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">245</td><td>macissougly</td><td>Durham Academy</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">246</td><td>ophast</td><td>Thomas Jefferson High School PA</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">247</td><td>Team Fried Rice</td><td>Lindenhurst Senior Highschool</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">248</td><td>MAD B</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">249</td><td>Intro to Comp Prog</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">250</td><td>Pitza party</td><td>Centennial</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">251</td><td>RadioactiveSmash</td><td>Centenial High ID</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">252</td><td>Ekh Yablochko</td><td>Kentwood High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">253</td><td>J. Edgar Hoover</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">254</td><td>G-Dragon's Red Queen</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">255</td><td>Balaboojesh Negus</td><td>Mount Si High School</td><td>450</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">256</td><td>hio</td><td>2112</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">399</td><td>GAM</td><td>No affiliation</td><td>450</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">400</td><td>xxxxx</td><td>xxxxx</td><td>400</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">401</td><td>cihi</td><td>indiv</td><td>400</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">402</td><td>minhquan1418</td><td>UIT</td><td>400</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">403</td><td>Exp</td><td>No affiliation</td><td>400</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">257</td><td>memeSquad</td><td>Glen Ridge High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">258</td><td>A person</td><td>N.A.</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">259</td><td>3 And A Half Teens</td><td>Mt. Vernon Middle School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">260</td><td>Mr Doc MOO</td><td>Whitney Young</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">261</td><td>all your flag are belong to us</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">409</td><td>Center of Innovation</td><td>Singapore American School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">262</td><td>Log.wtf</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">411</td><td>xamxidu</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">263</td><td>CUR10US</td><td>Wakefield Memorial High School</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">413</td><td>Absolute_0x??_Null</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">264</td><td>PHS Precalculaas</td><td>Poolesville High School</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">415</td><td>memory_life</td><td>UIT</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">416</td><td>Physics League</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">265</td><td>Bunch-o-Fruits</td><td>Same lunch box</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">266</td><td>nubs</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">419</td><td>Matrix Cyber Champions</td><td>The Open University</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">267</td><td>java.lang.StackOverflowError</td><td>Mass Academy</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">268</td><td>cancer</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">422</td><td>/* No Comment */</td><td>University of Maryland, College Park</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">269</td><td>The Eburones</td><td>Pembroke High School</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">424</td><td>Merry Reapers</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">270</td><td>hsctf_49qmji6d2xv7d8vuq7n3gr1en2dtxpp7</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">271</td><td>Young Money Entertainment</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">427</td><td>Booty Cheeks</td><td>Jiggle Jiggle Pop</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">272</td><td>hsctf_ok7pg2g90wg44421w9ojbc0w83fo21e1</td><td>School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">273</td><td>Kidd Kurry and Several Background Dancers</td><td>LakeView Technology Academy</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">274</td><td>My Team</td><td>Bergen County Academies</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">275</td><td>DAB OF RAnch</td><td>Huntley High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">276</td><td>We forfeit</td><td>Hamburg High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">277</td><td>Bananagans</td><td>Ashwaubenon High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">278</td><td>LWHS Super Team</td><td>LWHS</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">279</td><td>EmailMeAtmGarda@franklinregional.k12.pa.us</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">280</td><td>Big Daddys</td><td>Sussex County Technical School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">281</td><td>Kommerce Kidz</td><td>Sussex County Technical School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">282</td><td>Nightly Ninjas</td><td>Springfield Township High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">283</td><td>TroySixSolo</td><td>Troy High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">284</td><td>No Name :)</td><td>Troy High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">285</td><td>Team Group</td><td>Sherwood High School</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">442</td><td>SunSp0ts</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">286</td><td>byte_me</td><td>High School South</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">287</td><td>The Failures</td><td>Quabbin Regional High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">288</td><td>Team Lightning</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">289</td><td>MichalPasierb</td><td>Morris County School of Technology</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">447</td><td>PantherYellowjacket</td><td>Polytechnic School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">290</td><td>Go Hackers</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">291</td><td>Garfield Goats</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">292</td><td>ecks to the dee</td><td>Healdsburg High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">293</td><td>The left corner</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">452</td><td>Kidletts</td><td>Bev Facey</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">294</td><td>Purple Fire Breathing Penguins</td><td>Cedarburg High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">295</td><td>Whspatriots123</td><td>Thomas Sprigg Wootton High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">296</td><td>Hershey Hackers</td><td>Hershey High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">297</td><td>Piccolos</td><td>Bergen County Academies</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">298</td><td>MilWestA</td><td>Millard West</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">299</td><td>Omega</td><td>Northwood High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">300</td><td>hannah banana</td><td>West Windsor-Plainsboro High School South</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">301</td><td>PotatoPotato</td><td>WWP High School South</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">302</td><td>Ape Thunder</td><td>Thomas Jefferson High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">303</td><td>I'm Doing This To Pass</td><td>Easton Area High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">304</td><td>RyAnKayAnJo</td><td>Easton Area High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">305</td><td>Bloxors</td><td>Easton Area High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">306</td><td>CTF</td><td>West Windsor Plainsboro High School South</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">307</td><td>LordsOfPoetry</td><td>Rangeview High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">308</td><td>WannaHack</td><td>Russia</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">309</td><td>Team Renegade</td><td>Ashwaubenon High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">310</td><td>Byrns1</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">311</td><td>EAHSCS</td><td>Easton Area High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">312</td><td>MoneyBros</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">313</td><td>Losers</td><td>kentwood</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">473</td><td>rain</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">314</td><td>better than the meme team</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">315</td><td>2A1W</td><td>Kentwood High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">316</td><td>Team Slavatore</td><td>Kentwood High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">317</td><td>2 Scrubs And A Computer</td><td>School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">318</td><td>Bronzies</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">319</td><td>The Warriors Blew a 3-1 Lead</td><td>Durham Academy</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">480</td><td>ctflearner</td><td>ctflearner</td><td>350</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">481</td><td>hardworking</td><td>D.Y.T</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">320</td><td>LCTC</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">321</td><td>Lovelacers</td><td>Harriton High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">322</td><td>Obristan</td><td>Harriton High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">323</td><td>The Bazaar Coders</td><td>WWP High School South</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">324</td><td>Coding Clowns</td><td>Troy High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">325</td><td>Microwave</td><td>Troy High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">326</td><td>The A-Team</td><td>LakeView Technology Academy</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">327</td><td>TheDreamTeam</td><td>Tantasqua Regional High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">328</td><td>THE SQILLIES</td><td>Tantasqua</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">329</td><td>gen2</td><td>Harriton High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">330</td><td>Team Name 1</td><td>Rocky Mountain High</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">331</td><td>Harpoon Of Approaching Judgement</td><td>Centennial Highschool</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">332</td><td>hyper vigilantes</td><td>Hyper vessels and dictionary's</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">333</td><td>CArter</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">334</td><td>Martin dude</td><td>Kentwood High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">335</td><td>Beta</td><td>Alhambra High School</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">336</td><td>NullPointerException</td><td>No affiliation</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">337</td><td>Tesla Team</td><td>WWPHSS</td><td>350</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">338</td><td>Astrovus</td><td>Boerne High School</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">501</td><td>sopwithCamel</td><td>No affiliation</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">502</td><td>Hedgehogs Are People Too</td><td>No affiliation</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">503</td><td>cothan</td><td>hsctf_rcy8m1y1odsvlb6gvdwoizmbr7vsvgq8</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">504</td><td>Hello_W0rld</td><td>No affiliation</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">505</td><td>CarnegieVanguardHoustonTX</td><td>Carnegie Vanguard High School</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">506</td><td>A new pie</td><td>Ho Chi Minh city University of Science</td><td>300</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">507</td><td>TWH</td><td>group</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">508</td><td>.MTV</td><td>Mountain View High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">339</td><td>Sublime</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">340</td><td>SNPAI</td><td>West Windsor-Plainsboro High School South</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">341</td><td>HTCPCP://</td><td>Deep Run High School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">512</td><td>DASD Staff</td><td>Drummond Area School District</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">513</td><td>Baby bacc ribs</td><td>James Hubert Blake High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">342</td><td>ibram</td><td>Park View High School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">515</td><td>Mark I</td><td>The Scots College</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">343</td><td>TCA Programming</td><td>school</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">517</td><td>Vanilla</td><td>UIT</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">518</td><td>endfastplz</td><td>EFP</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">519</td><td>moshe</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">344</td><td>HackAttack</td><td>School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">345</td><td>nope</td><td>nope</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">346</td><td>Mango Llamas</td><td>Spring-Ford Senior High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">347</td><td>CantTouchThis</td><td>phs</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">524</td><td>0b51d14n</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">348</td><td>SingerCSP_TeamA</td><td>Freedom High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">349</td><td>K1NG</td><td>12</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">350</td><td>The Foundry</td><td>Liberty High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">351</td><td>Partners???</td><td>Faith Lutheran High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">352</td><td>Patriots</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">353</td><td>2K Legends Pack</td><td>Ashwaubenon High School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">531</td><td>Ineligible_Team</td><td>International High School at Union Square</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">532</td><td>REDTEAM</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">354</td><td>FF20</td><td>Adlai E. Stevenson High School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">534</td><td>Landis</td><td>Brookside High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">355</td><td>Blodge Balls</td><td>PHSCT</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">356</td><td>PHS Solo</td><td>Portland High School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">537</td><td>Defenders</td><td>Freedom High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">357</td><td>Lods of emone</td><td>West Morris Mendham Highschool</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">539</td><td>TroySix</td><td>TroySix</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">358</td><td>PHS Young and Outstanding Individual</td><td>Poolesville High Skool</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">541</td><td>The G-Man Group</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">359</td><td>PuzzleCrackers</td><td>Brookside High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">360</td><td>TAMS TCA</td><td>School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">361</td><td>Triple J Coders</td><td>p00p Clan</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">545</td><td>Senioritis1234</td><td>West Windsor Plainsboro High School North</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">362</td><td>System.out.println();</td><td>WWP - HSS</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">363</td><td>\n</td><td>Raritan High School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">548</td><td>IDK</td><td>WWP - High School North</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">364</td><td>savageScarps</td><td>West Windsor Plainsboro HS South</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">365</td><td>shesaiddon'tdoitsoIdid</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">551</td><td>TEACODE</td><td>TEACODE</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">552</td><td>TaeBoo</td><td>HUST</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">366</td><td>Team GORT</td><td>Warren Hills Regional High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">367</td><td>GunshotBaka</td><td>Waterford Mott High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">368</td><td>Heartless Demon Brigade</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">369</td><td>Russian Meme Team</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">370</td><td>The A Team</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">558</td><td>h2oFOUL</td><td>Worcester Preparatory School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">559</td><td>The Cereal Killers</td><td>Bev Facey</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">560</td><td>HHSTeacher</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">371</td><td>Vote for Grump</td><td>Oceanside High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">372</td><td>ravioli</td><td>OSIDE</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">373</td><td>Alek and Eleana and Their Pet Turtle</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">564</td><td>MinmaX</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">565</td><td>earthworm</td><td>HUST</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">566</td><td>thedi</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">374</td><td>TheMemeTeam</td><td>Waterford Mott High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">375</td><td>reve</td><td>High School North</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">376</td><td>NOLAgang</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">377</td><td>HackerGirl2000</td><td>GirlRulz.com</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">378</td><td>01100110 01110101 01100011 01101011</td><td>Mountain View High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">379</td><td>Skyplex Inc</td><td>Heritage High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">380</td><td>TantasquaPeople</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">381</td><td>PMARINAS</td><td>Princeton High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">382</td><td>Fire Breathing Rubber Ducks</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">383</td><td>The Cat Team</td><td>Rockdale Career Academy</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">577</td><td>DreamEater101</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">384</td><td>ag</td><td>WWP HSN</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">579</td><td>lkj</td><td>ut</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">580</td><td>Orange Penguin Lump</td><td>Camberwell Grammar School</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">581</td><td>d.y.t</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">385</td><td>comp_sci or die</td><td>Harriton High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">386</td><td>Arstotzka</td><td>Harriton High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">387</td><td>Bean Gang</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">388</td><td>westwindia</td><td>West Windsor-Plainsboro High School South</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">389</td><td>NAACP</td><td>West Windsor-Plainsboro High School South</td><td>250</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">587</td><td>shombo</td><td>No affiliation</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">390</td><td>Team One</td><td>Oceanside High School</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">391</td><td>sarrah</td><td>Centennial High</td><td>250</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">392</td><td>xd</td><td>none</td><td>200</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">591</td><td>testttewq</td><td>home</td><td>200</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">393</td><td>Open Source</td><td>No affiliation</td><td>200</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">394</td><td>D++</td><td>Lakeview Tech</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">395</td><td>Raiders</td><td>Northfield High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">396</td><td>RZJHS</td><td>Rochelle Zell Jewish High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">397</td><td>THS Coders</td><td>Teaneck High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">398</td><td>International Team3</td><td>International High School at Union Square</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">598</td><td>Elite Hacksors</td><td>Faith Lutheran Middle School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">399</td><td>432</td><td>Del Norte High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">400</td><td>The Usual Suspects</td><td>Lakeland High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">401</td><td>let 2 + 2 = 5 in 2 + 2</td><td>Lake Braddock Secondary School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">402</td><td>U.P.O.K.</td><td>South Technical high</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">403</td><td>PHS CTF</td><td>Patriot High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">404</td><td>N</td><td>Shelley High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">605</td><td>bateboiz</td><td>Oundle School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">405</td><td>Poppy</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">607</td><td>Friendship Tigers</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">406</td><td>TroyHighCTF</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">407</td><td>20.32 cm</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">610</td><td>pimania</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">408</td><td>A2C</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">409</td><td>Team++;</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">410</td><td>62656E5F69735F615F6269746368</td><td>Bergen County Academies</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">614</td><td>kmaaa</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">411</td><td>Santa Maria</td><td>Spain</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">412</td><td>EekSquad</td><td>Alexandria Middle School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">617</td><td>VNCH</td><td>Việt Nam Cộng Hòa</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">618</td><td>Zô Zô !</td><td>UIT</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">619</td><td>NLCS JEJU</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">413</td><td>SHS CSC</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">414</td><td>TheFestest</td><td>Sewickley Academy</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">622</td><td>ZekTeam</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">623</td><td>VJedi</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">624</td><td>NewBieCTF</td><td>NewBieCTF</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">625</td><td>33q3</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">626</td><td>No Name</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">627</td><td>Kryto</td><td>KMA</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">628</td><td>VicTiny</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">415</td><td>Whitefish High School</td><td>Whitefish High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">630</td><td>akane</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">631</td><td>Cú</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">632</td><td>Gh057Pr1nc3</td><td>MTA</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">416</td><td>The Chairwalkers</td><td>Sussex County Technical High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">417</td><td>wombats.edu</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">418</td><td>CodeKnightDivision</td><td>Kuemper Catholic High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">419</td><td>Dooders</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">637</td><td>BeastlyJman</td><td>BeastlyJman</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">420</td><td>Warwick</td><td>Warwick High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">421</td><td>PHS MrQwerties</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">640</td><td>TheLittleHackersThatCould</td><td>CCBC</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">422</td><td>Wildcats</td><td>The Westwood School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">423</td><td>Trurl_the Constructor</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">424</td><td>Jay</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">425</td><td>CryptoCode</td><td>Is187</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">426</td><td>squirrel</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">427</td><td>QED</td><td>abc</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">428</td><td>GWHS</td><td>George Washington HS (CO)</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">429</td><td>Team 1</td><td>KAMSC</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">649</td><td>CyberSlugz</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">430</td><td>Han</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">431</td><td>uh</td><td>Thomas Jefferson High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">432</td><td>Suburban Rain</td><td>Harriton High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">433</td><td>Snakes Galore</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">434</td><td>Granite Parallel Sawdust</td><td>WHS</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">655</td><td>shavim</td><td>other</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">656</td><td>cức</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">435</td><td>Qubitors</td><td>Lowell High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">658</td><td>InKryptz</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">659</td><td>MSEC</td><td>MTA</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">660</td><td>Nevol</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">436</td><td>ECSROBOT3</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">662</td><td>bossbaby</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">437</td><td>Single Chopstick</td><td>School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">438</td><td>wayton's crew</td><td>WWP South</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">439</td><td>bruhh</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">440</td><td>Some Team</td><td>Brookside High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">441</td><td>Eagles</td><td>North Point High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">442</td><td>DOGRA</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">669</td><td>Hakobay</td><td>Oyster Bay High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">443</td><td>I am noot a Rooboot.</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">444</td><td>ratata</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">445</td><td>BackRowSquad</td><td>Portland High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">446</td><td>thelegend27</td><td>Pepe teh frog</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">447</td><td>Blue Team</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">675</td><td>SA_D&amp;D</td><td>Sewickley Academy</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">448</td><td>{esotericjokehere}</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">449</td><td>I have no friends</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">678</td><td>Informants</td><td>Illinois State University</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">450</td><td>Shake n' Bake</td><td>Eagle High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">451</td><td>MMMK</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">452</td><td>Spicy Pepper</td><td>Warren Hills High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">453</td><td>Taco</td><td>Warren Hills Regional High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">454</td><td>Vlan Vikings</td><td>Bio-Med Science Academy</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">455</td><td>hsctf_ensrscs1lot4ih3tvxyfauszp6lruaix</td><td>Just a Random Team</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">685</td><td>Practice</td><td>None</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">456</td><td>Grassss taste bad</td><td>Portage High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">457</td><td>Programing Pandas</td><td>Highland Park Senior High</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">688</td><td>lil_irish_boys</td><td>HPSH</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">458</td><td>Tchaa</td><td>Highland</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">459</td><td>Mo'Malley mo'problems</td><td>Deerfield Highschool</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">460</td><td>JavaTheHutt</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">461</td><td>Shore</td><td>Deerfield</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">462</td><td>PostMeridian</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">463</td><td>Team Team</td><td>Portage High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">464</td><td>Bill Cosby Is My Hero</td><td>Highland</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">465</td><td>Pusheen Butterfly</td><td>Portage High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">466</td><td>Franklin Regional Computer Science</td><td>Franklin Regional Senior High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">467</td><td>idk</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">468</td><td>International Team2</td><td>International High School at Union Square</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">469</td><td>Team Rachel and Alia</td><td>Old Bridge High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">470</td><td>Wumbosizers</td><td>Lakeview Technology Academy</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">471</td><td>GenericHackers76</td><td>LakeView Technology Academy</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">703</td><td>TTS</td><td>UIT</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">704</td><td>Mrs. Fournier</td><td>Hopkinton High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">472</td><td>The Bier Family</td><td>Highland Park</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">473</td><td>Game Design 2</td><td>Portage High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">474</td><td>ZeroCool</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">475</td><td>MAC SQUAD</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">476</td><td>highland-davalle</td><td>highlannd</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">477</td><td>The Winners</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">711</td><td>Pita09</td><td>Troy High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">478</td><td>Rosenthal's Boys</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">479</td><td>Sweet Code O' Mine</td><td>Huntley High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">480</td><td>Heifers</td><td>Heifers</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">481</td><td>OH YEAH</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">482</td><td>OG Clan</td><td>Squad</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">483</td><td>Crabtree</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">484</td><td>The Conga Line For Peace</td><td>Rogers Heritage High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">485</td><td>31337</td><td>Evil Corp</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">486</td><td>LomaHackz</td><td>Logan-Magnolia High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">487</td><td>4th reich</td><td>Papa Otto</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">488</td><td>Womb Raiders</td><td>Hamburg High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">489</td><td>The Bad Team</td><td>Ashwaubenon High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">490</td><td>scoobydoocyberchase</td><td>troy high school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">491</td><td>aafnanm</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">492</td><td>michael solo</td><td>edward r murrow</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">493</td><td>Genni Fan Club</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">494</td><td>Big Baller Brand</td><td>WWP-HSS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">495</td><td>String CHEESE;</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">496</td><td>THAT'S MY NINJA WAY!!!!!!</td><td>Affiliations Unavailable</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">497</td><td>Camden - (Andrew + Tom) 4 lyfe</td><td>Tantasquaaaaaaaaaad</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">498</td><td>Cedar Springs Hackers</td><td>Cedar Springs Homeschool Group</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">499</td><td>ecsrob4</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">734</td><td>Ovrkil</td><td>Hobby</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">500</td><td>Plebions</td><td>123</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">501</td><td>BoyD7</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">502</td><td>ECSROB5</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">503</td><td>The Baja Blasters</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">504</td><td>Cyber CBD</td><td>burnsville high school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">505</td><td>Alone Team</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">506</td><td>ECSRob6</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">507</td><td>Men Without Hats</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">508</td><td>Douglasers</td><td>Mountain Veiw High Shool</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">509</td><td>Megaduck</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">510</td><td>CANCEROUS ALMONDS</td><td>Centennial High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">511</td><td>The CatFish Crew</td><td>King/Drew Magnet High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">512</td><td>etvreve</td><td>gbrtedv</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">513</td><td>French Toast Mafia</td><td>King/Drew Magnet High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">514</td><td>Hack Us If You Can</td><td>King/Drew Magnet High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">515</td><td>Gold Team</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">516</td><td>Bengals</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">517</td><td>The Dancing Lobsters</td><td>Brenham High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">753</td><td>#OneKoreaBetterTogether hsctf_rg6a28pr8p8pix7gf6n</td><td>TRUE KOREA</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">518</td><td>The Elite Team.</td><td>King Drew High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">519</td><td>Fuzzy Rainbow Monkeys</td><td>Lakeland Senior High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">520</td><td>FozzyBear's</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">521</td><td>R-eally P-rofessional G-amers</td><td>Rogers High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">522</td><td>Team Chase</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">523</td><td>Team Love and Stuff</td><td>Kentwood High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">524</td><td>S.A.S</td><td>Kentwood Highschool</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">761</td><td>TeacherTester</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">762</td><td>AP CSP</td><td>Bear River High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">525</td><td>FreePepe2017</td><td>Bear River High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">526</td><td>Alphabet soup</td><td>kentwood</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">527</td><td>Team_Daddy_Dylan</td><td>Bear River Highschool</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">528</td><td>coding babes</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">529</td><td>Hoons</td><td>Bear River High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">530</td><td>Verdugo Hills</td><td>Los Angeles Unified School District</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">531</td><td>IronBolt</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">532</td><td>cyb3rbull135</td><td>Mountain View High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">533</td><td>Team A</td><td>Bear River High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">534</td><td>givinchythegod</td><td>School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">535</td><td>Geometrees</td><td>Kealing Middle School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">536</td><td>Umm How Do You Code</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">537</td><td>hi</td><td>Healdsburg High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">538</td><td>Reptilian Overlords</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">777</td><td>AHS Lions 2</td><td>Ambassador High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">539</td><td>Stealth Cypher</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">540</td><td>PHS Iliad</td><td>Poolesville High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">780</td><td>BlackSolo</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">781</td><td>PutangInaMo</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">541</td><td>Encryption Vipers</td><td>Information Technology High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">542</td><td>SodaBuyers</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">543</td><td>The Singularity</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">785</td><td>Mineola Teachers</td><td>Mineola High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">544</td><td>butts jr.</td><td>Stop Changing Our Name, Dicks</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">545</td><td>Prepared for Terries</td><td>Seal Team Eight</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">546</td><td>Gamers</td><td>Easton Area High, Easton, Pa</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">547</td><td>miffy</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">548</td><td>Whosmstve</td><td>Vestal High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">549</td><td>IdontknowIdontcare</td><td>Thomas Jefferson High School(PA)</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">550</td><td>nadie</td><td>Freedom High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">551</td><td>Just a Random Team</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">552</td><td>YAH</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">553</td><td>my team</td><td>Long Island Lutheran High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">554</td><td>Emoji Movie Fanatics</td><td>Mukwonago</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">555</td><td>Zerø</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">556</td><td>A cold one with the 🅱oys 💯💯💯</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">557</td><td>mbb23</td><td>SCAHS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">558</td><td>Kidz Bop: The lost tapes</td><td>RMHS/CHS</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">801</td><td>Gatorzzzzzz</td><td>Greenwich Academy</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">559</td><td>qwerty</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">560</td><td>i wanna die #bloodpact</td><td>scasd</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">561</td><td>Thanks SCASD</td><td>SCASD</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">562</td><td>DERRICKROSE</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">563</td><td>Scituate Senioritis 1</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">564</td><td>Robot Lobotomy</td><td>West Essex High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">565</td><td>SCASDGroup</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">566</td><td>Stop Bothering Me</td><td>West Essex Regional High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">567</td><td>The Bamboozlers</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">568</td><td>CoolKidzClub</td><td>Rangeview High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">569</td><td>The Ballerz</td><td>Rangeview High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">570</td><td>Espeon</td><td>Del Norte High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">571</td><td>PHS Blank</td><td>Poolesville High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">815</td><td>warriors</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">572</td><td>team team</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">573</td><td>It's Always Ryan's Fault</td><td>SCAHS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">574</td><td>MLG Sneetches</td><td>SCAHS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">575</td><td>APBIO Trade Off</td><td>Hamburg School .org</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">576</td><td>Bjornicorns Of Love</td><td>Westhampton Beach High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">821</td><td>harambeHadItComing</td><td>Brenham High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">577</td><td>APCSPP5</td><td>State College Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">578</td><td>DatTeam</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">579</td><td>Brick Squad</td><td>Warren Hills Regional High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">580</td><td>The Motherland</td><td>Scasd</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">581</td><td>10^-12</td><td>State College Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">582</td><td>Not A Team</td><td>School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">828</td><td>Namone</td><td>VietNam National University</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">829</td><td>Da Flippy-Dos</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">583</td><td>bit.ly/APCSP</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">584</td><td>Stevensville</td><td>Stevensville</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">585</td><td>dank dogs</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">833</td><td>HurricaneZ</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">586</td><td>HHS Destroyers</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">835</td><td>We Are Just Here For The Food</td><td>Bev Facey</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">587</td><td>International Team1</td><td>International High School at Union Square</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">837</td><td>NorthTeacher</td><td>Omaha North Magnet High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">838</td><td>azby</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">588</td><td>ProgrammableTacos</td><td>Milwee Middle School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">589</td><td>Speed</td><td>Speed</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">590</td><td>AUDI NO META</td><td>Takoma Park Middle School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">591</td><td>Kealing</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">592</td><td>Potatoe on Rainboe</td><td>Takoma Park MS</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">844</td><td>IHaveNoFriends</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">845</td><td>abckid</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">846</td><td>wh04m1</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">593</td><td>Hack Attack</td><td>Brookside High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">594</td><td>This Team</td><td>West Windsor Plainsboro High School South</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">595</td><td>THSSS</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">850</td><td>Gordone Ramsaes</td><td>West-Windsor Plainsboro High School North</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">596</td><td>Bock Ross</td><td>School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">597</td><td>thsss</td><td>THSSS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">598</td><td>AP Programmers</td><td>Pembroke High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">599</td><td>Ada's Teens</td><td>Harriton High School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">855</td><td>PMS</td><td>CIS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">600</td><td>YaggerBombers</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">601</td><td>Team 27</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">602</td><td>jub</td><td>EAHS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">603</td><td>Climbing to Heaven</td><td>ITHS</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">604</td><td>Vicious and Delicious</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">605</td><td>KAM</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">862</td><td>KILLERBEE</td><td>hsctf_2odgjezgu00e8evfmjm6ttu8n6acng53</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">606</td><td>ECS Rob 2</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">607</td><td>Pineapple</td><td>Hillcrest High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">608</td><td>Finance</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">866</td><td>Frenchtoast</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">609</td><td>TEAM AWESOME#1</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">610</td><td>0x3030 (Base-6)</td><td>Ridgewood High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">611</td><td>werok</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">612</td><td>Dos Seven</td><td>Troy High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">613</td><td>Nolian</td><td>Waterford Mott</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">614</td><td>Aneeslesh</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">615</td><td>Mikayla's</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">616</td><td>Core Four and the Meme Team</td><td>Sussex County Technical School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">617</td><td>White Face</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">618</td><td>Team Carmichael</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">619</td><td>arthropodcucumberbird</td><td>Polytechnic School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">620</td><td>SBHS</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">621</td><td>G.O.A.T</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">622</td><td>The Citizens of F L A V O R Town</td><td>Harriton High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">623</td><td>HIGH NOON</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">624</td><td>chikin tendies</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">625</td><td>9daysleft</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">626</td><td>u.system.exit(0)</td><td>Deerfield High school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">627</td><td>LonelyTriton</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">628</td><td>CCA Comp Sci</td><td>Canyon Crest Academy</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">629</td><td>The Goofy Goobers</td><td>Cedarburg High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">630</td><td>FEFFER</td><td>school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">631</td><td>Scythe</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">632</td><td>FefferFTW</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">633</td><td>Completely Original Name</td><td>Warren Hills Regional High school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">634</td><td>Unexpected</td><td>Not today</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">635</td><td>Totally Professionals</td><td>From the Glorious Blue Planet of Earth</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">894</td><td>TestTeam</td><td>test</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">636</td><td>The Screen Grabber 2000</td><td>Livonia Career Tech Center</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">637</td><td>Team Garzals</td><td>Waterford Mott High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">638</td><td>saicharles</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">639</td><td>CHSGodSquad</td><td>Cran-hood High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">640</td><td>Spartan524</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">641</td><td>savannah</td><td>HassanIsUnique</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">901</td><td>meme.zip</td><td>West Windsor Plainsboro High School North</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">642</td><td>SC23</td><td>Scasd</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">643</td><td>The Tundra Vigilanties</td><td>Centennial High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">644</td><td>XXElite_h4ck3rsXX</td><td>Northwood High school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">645</td><td>SCASD</td><td>SC22</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">646</td><td>Takis</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">647</td><td>None Pizza w/ Left Beef</td><td>School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">648</td><td>BananaTacoStrawberry</td><td>Atwater Highschool</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">649</td><td>Minecrafters</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">650</td><td>MC Jimmy Bingo fan club</td><td>Northwood high school</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">651</td><td>Spooky Rovers</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">652</td><td>Hacker123</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">653</td><td>Stop Slamming</td><td>Easton Area High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">654</td><td>Porkins Fan Club</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">655</td><td>OVO17</td><td>Atwater High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">656</td><td>Computer Science</td><td>Atwater High</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">657</td><td>(Insert really cool team name)</td><td>Atwater High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">658</td><td>falcons</td><td>hi</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">919</td><td>Newbies</td><td>KSU</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">920</td><td>Moegami</td><td>Weebsite</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">659</td><td>Lady Dogs</td><td>School Club</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">660</td><td>Moonshots</td><td>Gilmour Academy</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">661</td><td>random</td><td>N/A</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">924</td><td>penguin the lump</td><td>Camberwell Grammar School</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">925</td><td>Temp123</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">662</td><td>ScituateTryHards</td><td>Scituate Highschools</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">663</td><td>bigals</td><td>LCTC</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">664</td><td>honeybadgerdontcare</td><td>LCC</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">665</td><td>Neon Neo</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">666</td><td>ACC</td><td>hsctf_j003ecdwp3h6pors66bmzrkeyrym7qz8</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">931</td><td>TripleTH</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">667</td><td>しぬ</td><td>Centennial High School and Meridian High School</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">668</td><td>TheWheelMachine</td><td>LCTC</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">669</td><td>CryptCode</td><td>is187</td><td>150</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">670</td><td>Ok</td><td>STUYVESANT HS</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">936</td><td>Professor A</td><td>No affiliation</td><td>150</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">937</td><td>Admins</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">671</td><td>!!!</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">672</td><td>phs asdf</td><td>Poolesville High School</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">940</td><td>Bad Joe Relief Fund</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">673</td><td>SF</td><td>Spring-Ford High School</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">674</td><td>I am a noob</td><td>Mount Nittany Middle School</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">675</td><td>Coding Chaos</td><td>Nativity Catholic School</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">944</td><td>TMWW</td><td>TMWW</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">676</td><td>America's Team</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">946</td><td>EROR 404</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">947</td><td>nNipsx</td><td>nNipsx</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">948</td><td>MrThomas</td><td>WMM</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">677</td><td>Mather</td><td>Mather High School</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">950</td><td>CHS Overlord</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">951</td><td>LT Test</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">678</td><td>Name Team</td><td>Brookside High School</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">953</td><td>This is not a team</td><td>Danville High School</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">954</td><td>jetcat</td><td>zz3</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">679</td><td>Faith Lutheran</td><td>hsctf_r3da33jg0burndh5txiknuf89u7fjfn1</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">680</td><td>School</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">957</td><td>tempteam</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">681</td><td>Tgmai</td><td>hsctf_wpdvqy3a9ufjcgicgl6hfj2gwhkv3gok</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">959</td><td>No Team</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">682</td><td>Goon Sqaud</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">683</td><td>LCareerTCenter</td><td>LCTC</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">962</td><td>Pajama</td><td>No affiliation</td><td>100</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">963</td><td>h-i-s</td><td>hsctf_ucotlqyudu6lrqxtz83qre99qlr7xi7i</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">964</td><td>Nymphaea Nouchali</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">684</td><td>McFarland</td><td>McFarland</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">966</td><td>TeamOxo</td><td>BK</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">967</td><td>ZXC</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">968</td><td>TLIS</td><td>TLU</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">685</td><td>A.P.P.</td><td>Cerritos High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">970</td><td>troyhigh11</td><td>school</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">971</td><td>fwilteam</td><td>fwilson</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">972</td><td>Vic-20</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">973</td><td>LuHiCrusaders</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">686</td><td>zeropixelteam</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">687</td><td>South High</td><td>South High</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">976</td><td>DreamTeam</td><td>Marlboro HS</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">688</td><td>Origami</td><td>Brooklyn Technical High School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">689</td><td>2383</td><td>AHS</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">690</td><td>Bepis</td><td>West Genesee High School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">691</td><td>THS</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">692</td><td>Saltines</td><td>KMS</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">693</td><td>fodalulz</td><td>Stuyvesant</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">694</td><td>nobodys</td><td>no one</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">984</td><td>0x42</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">985</td><td>zharkz</td><td>The SMIC Private School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">986</td><td>Vouden</td><td>RMIT</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">695</td><td>S0c1ally 4wkw@rd</td><td>Conifer Highschool / Alone</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">696</td><td>Cedar Springs</td><td>Cedar Springs Homeschool Group</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">989</td><td>Vegetables</td><td>John Paul the Great Academy</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">697</td><td>Moe</td><td>West Genesee High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">991</td><td>bot Useless</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">698</td><td>patwang123</td><td>School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">699</td><td>Thunder Down Under</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">700</td><td>CATALYST</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">995</td><td>cyberteam</td><td>University</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">996</td><td>DDPlus</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">701</td><td>ECSRob1</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">702</td><td>SS</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">703</td><td>Monty Tech Ram-32</td><td>Monty Tech</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1000</td><td>DavisIsAwesome</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1001</td><td>TeamRockets</td><td>Raritan High School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">704</td><td>t</td><td>GetMosherd</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">705</td><td>Hpsh cl</td><td>Highland Park Highschool</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1004</td><td>pied piped</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">706</td><td>i dont care</td><td>s</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">707</td><td>frutatropical</td><td>Troy High</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">708</td><td>Parker J HPHS</td><td>HPHS</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">709</td><td>yes</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">710</td><td>LuHi SYO👌</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">711</td><td>set 3</td><td>school</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1011</td><td>BSFC</td><td>BSFC</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">712</td><td>GMHS</td><td>Great Mills High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1013</td><td>woodtest</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1014</td><td>The MAAM</td><td>High School North</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">713</td><td>Ecsrob7</td><td>School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">714</td><td>charizard019798</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">715</td><td>Shattered Stones</td><td>Shattered Stones</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">716</td><td>K-Town</td><td>Oceanside High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1019</td><td>Woodleigh Warriors</td><td>Woodleigh School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1020</td><td>Labuda</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">717</td><td>Ders Hack</td><td>Scarsdale High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1022</td><td>G.R.S.N. 7</td><td>Easton Area High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1023</td><td>Z2r0Field</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">718</td><td>cnis</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">719</td><td>LuHi Roxs</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">720</td><td>The Urinals</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">721</td><td>That Team</td><td>State High</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">722</td><td>Byrns2.0</td><td>scasd</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">723</td><td>Guygos</td><td>School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">724</td><td>Binary</td><td>MCST</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">725</td><td>30°30’38.44″S115°22’56.03″E</td><td>West Morris Mendham</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">726</td><td>Eastern Cuisine</td><td>LASA High School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">727</td><td>sk8er_boyz</td><td>Tulare Union High School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">728</td><td>XetronCyberPatriot</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1035</td><td>CGC</td><td>BLOG</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">729</td><td>Los Frijoles</td><td>Information Technology High School</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1037</td><td>Bamboo</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">730</td><td>Untitled</td><td>Franklin Community High School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">731</td><td>APCSP Rovers</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">732</td><td>Thundercrackers</td><td>Easton Area High</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">733</td><td>Easton Area High School</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">734</td><td>new team</td><td>school</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1043</td><td>Team 5p1d3r</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">735</td><td>THE TEAM</td><td>LCTC</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">736</td><td>The Average Guys</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">737</td><td>Brenham</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">738</td><td>SC22</td><td>Scasd</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">739</td><td>Silent Assassins</td><td>School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">740</td><td>Dangling Pointers</td><td>Porter-Gaud School</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">741</td><td>Raptor</td><td>THAT'S MY NINJA WAY!!!!!!</td><td>50</td></tr>
+					<tr class="teamrow ineligible"><td class="rank">1051</td><td>Triple-TH</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">742</td><td>Akshit Dewan</td><td>n/a</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">743</td><td>Aftershock</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">744</td><td>hacktheplanet</td><td>No affiliation</td><td>50</td></tr>
+					<tr class="teamrow eligible visible"><td class="rank">745</td><td>AngMar</td><td>WWP High School North</td><td>50</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.3/jquery.timeago.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.9.0/vis.min.js"></script>
+		<script src="/static/js/api.js"></script>
+		<script src="/static/js/main.js"></script>
+		<script>
+			$(function() {
+				$("abbr.time[title='1970-01-01 00:00:00']").attr("title", "").removeClass("time").html("None");
+				$("abbr.time").timeago();
+				$('.button-collapse').sideNav();
+			});
+		</script>
+		<script id="toasts" type="text/javascript"></script>
+		<script>
+			recalcRanks();
+			var graphData = [["Producing Perfection", [["2017-05-20 23:39:12.401083", 0], ["2017-05-20 23:39:12.402083", 300], ["2017-05-20 23:58:18.735184", 300], ["2017-05-20 23:58:18.736184", 600], ["2017-05-21 02:17:28.593780", 600], ["2017-05-21 02:17:28.594780", 1000], ["2017-05-21 12:04:03.935664", 1000], ["2017-05-21 12:04:03.936664", 1100], ["2017-05-21 14:49:25.679082", 1100], ["2017-05-21 14:49:25.680082", 1400], ["2017-05-21 19:29:25.579808", 1400], ["2017-05-21 19:29:25.580808", 1800], ["2017-05-21 19:55:50.074126", 1800], ["2017-05-21 19:55:50.075126", 2200], ["2017-05-21 21:02:04.824173", 2200], ["2017-05-21 21:02:04.825173", 2600], ["2017-05-22 00:31:10.835293", 2600], ["2017-05-22 00:31:10.836293", 2800], ["2017-05-22 22:38:23.257026", 2800], ["2017-05-22 22:38:23.258026", 2900], ["2017-05-22 22:38:36.949826", 2900], ["2017-05-22 22:38:36.950826", 3000], ["2017-05-22 22:38:43.256093", 3000], ["2017-05-22 22:38:43.257093", 3100], ["2017-05-22 22:38:48.199013", 3100], ["2017-05-22 22:38:48.200013", 3200], ["2017-05-22 22:38:52.816178", 3200], ["2017-05-22 22:38:52.817178", 3400], ["2017-05-22 22:38:58.008060", 3400], ["2017-05-22 22:38:58.009060", 3600], ["2017-05-22 22:39:02.738083", 3600], ["2017-05-22 22:39:02.739083", 3800], ["2017-05-22 22:39:10.876760", 3800], ["2017-05-22 22:39:10.877760", 4000], ["2017-05-22 22:39:14.669738", 4000], ["2017-05-22 22:39:14.670738", 4200], ["2017-05-22 22:39:18.512153", 4200], ["2017-05-22 22:39:18.513153", 4400], ["2017-05-22 22:39:21.214034", 4400], ["2017-05-22 22:39:21.215034", 4800], ["2017-05-22 22:39:26.081400", 4800], ["2017-05-22 22:39:26.082400", 4900], ["2017-05-22 22:39:30.074357", 4900], ["2017-05-22 22:39:30.075357", 5000], ["2017-05-22 22:39:32.428819", 5000], ["2017-05-22 22:39:32.429819", 5500], ["2017-05-22 22:39:42.600178", 5500], ["2017-05-22 22:39:42.601178", 5900], ["2017-05-22 22:39:52.253473", 5900], ["2017-05-22 22:39:52.254473", 6200], ["2017-05-22 22:39:54.508144", 6200], ["2017-05-22 22:39:54.509144", 6400], ["2017-05-22 22:39:59.691399", 6400], ["2017-05-22 22:39:59.692399", 6450], ["2017-05-22 22:40:12.184767", 6450], ["2017-05-22 22:40:12.185767", 6550], ["2017-05-22 22:42:42.356400", 6550], ["2017-05-22 22:42:42.357400", 6650], ["2017-05-22 23:43:17.794108", 6650], ["2017-05-22 23:43:17.795108", 7150], ["2017-05-23 02:13:03.936868", 7150], ["2017-05-23 02:13:03.937868", 7450], ["2017-05-24 23:18:12.848410", 7450], ["2017-05-24 23:18:12.849410", 8050], ["2017-05-25 17:22:20.592833", 8050], ["2017-05-25 17:22:20.593833", 8350], ["2017-05-25 19:00:17.343185", 8350], ["2017-05-25 19:00:17.344185", 8750], ["2017-05-26 15:43:43.264351", 8750], ["2017-05-26 15:43:43.265351", 9150], ["2017-05-27 16:08:42.495864", 9150]]], ["parse it up", [["2017-05-20 18:40:43.198918", 0], ["2017-05-20 18:40:43.199918", 200], ["2017-05-20 19:03:22.417595", 200], ["2017-05-20 19:03:22.418595", 500], ["2017-05-20 19:33:54.822913", 500], ["2017-05-20 19:33:54.823913", 600], ["2017-05-20 19:47:01.725882", 600], ["2017-05-20 19:47:01.726882", 800], ["2017-05-20 19:48:35.915718", 800], ["2017-05-20 19:48:35.916718", 850], ["2017-05-20 20:01:05.761607", 850], ["2017-05-20 20:01:05.762607", 950], ["2017-05-20 20:53:58.638663", 950], ["2017-05-20 20:53:58.639663", 1250], ["2017-05-20 21:48:07.987659", 1250], ["2017-05-20 21:48:07.988659", 1450], ["2017-05-20 22:45:34.146676", 1450], ["2017-05-20 22:45:34.147676", 1550], ["2017-05-20 23:26:26.241542", 1550], ["2017-05-20 23:26:26.242542", 1650], ["2017-05-20 23:34:21.605294", 1650], ["2017-05-20 23:34:21.606294", 2050], ["2017-05-20 23:35:22.245668", 2050], ["2017-05-20 23:35:22.246668", 2150], ["2017-05-20 23:55:01.466661", 2150], ["2017-05-20 23:55:01.467661", 2450], ["2017-05-21 00:07:24.870756", 2450], ["2017-05-21 00:07:24.871756", 2650], ["2017-05-21 00:11:53.105235", 2650], ["2017-05-21 00:11:53.106235", 2850], ["2017-05-21 00:12:44.130001", 2850], ["2017-05-21 00:12:44.131001", 2950], ["2017-05-21 00:18:16.413968", 2950], ["2017-05-21 00:18:16.414968", 3050], ["2017-05-21 01:20:38.797501", 3050], ["2017-05-21 01:20:38.798501", 3250], ["2017-05-21 03:56:38.046723", 3250], ["2017-05-21 03:56:38.047723", 3650], ["2017-05-21 04:34:02.549685", 3650], ["2017-05-21 04:34:02.550685", 3750], ["2017-05-21 04:41:39.149973", 3750], ["2017-05-21 04:41:39.150973", 3850], ["2017-05-21 04:58:03.554685", 3850], ["2017-05-21 04:58:03.555685", 4050], ["2017-05-21 05:33:18.748398", 4050], ["2017-05-21 05:33:18.749398", 4450], ["2017-05-21 05:37:42.103986", 4450], ["2017-05-21 05:37:42.104986", 4650], ["2017-05-21 13:18:20.089764", 4650], ["2017-05-21 13:18:20.090764", 5050], ["2017-05-21 16:56:39.940365", 5050], ["2017-05-21 16:56:39.941365", 5550], ["2017-05-21 20:12:07.471869", 5550], ["2017-05-21 20:12:07.472869", 5950], ["2017-05-21 22:55:48.898389", 5950], ["2017-05-21 22:55:48.899389", 6250], ["2017-05-23 00:18:09.531766", 6250], ["2017-05-23 00:18:09.532766", 6650], ["2017-05-24 20:16:45.413224", 6650], ["2017-05-24 20:16:45.414224", 7250], ["2017-05-25 13:39:49.922033", 7250], ["2017-05-25 13:39:49.923033", 7650], ["2017-05-26 08:48:20.975781", 7650], ["2017-05-26 08:48:20.976781", 8050], ["2017-05-26 22:31:53.445856", 8050], ["2017-05-26 22:31:53.446856", 8350], ["2017-05-27 02:16:59.443980", 8350], ["2017-05-27 02:16:59.444980", 8850], ["2017-05-27 16:08:42.501138", 8850]]], ["Hackademia", [["2017-05-21 05:17:55.737042", 0], ["2017-05-21 05:17:55.738042", 50], ["2017-05-21 06:27:12.311825", 50], ["2017-05-21 06:27:12.312825", 150], ["2017-05-21 06:34:52.766035", 150], ["2017-05-21 06:34:52.767035", 250], ["2017-05-21 06:36:29.713475", 250], ["2017-05-21 06:36:29.714475", 350], ["2017-05-21 06:47:44.208947", 350], ["2017-05-21 06:47:44.209947", 550], ["2017-05-21 07:07:37.006867", 550], ["2017-05-21 07:07:37.007867", 650], ["2017-05-21 08:10:16.242880", 650], ["2017-05-21 08:10:16.243880", 750], ["2017-05-21 08:20:28.318561", 750], ["2017-05-21 08:20:28.319561", 950], ["2017-05-21 08:25:31.963333", 950], ["2017-05-21 08:25:31.964333", 1150], ["2017-05-21 12:36:25.731283", 1150], ["2017-05-21 12:36:25.732283", 1250], ["2017-05-21 12:39:17.004981", 1250], ["2017-05-21 12:39:17.005981", 1450], ["2017-05-21 12:40:22.857767", 1450], ["2017-05-21 12:40:22.858767", 1650], ["2017-05-21 13:09:32.568428", 1650], ["2017-05-21 13:09:32.569428", 1750], ["2017-05-21 13:38:25.044255", 1750], ["2017-05-21 13:38:25.045255", 1850], ["2017-05-21 15:20:51.970112", 1850], ["2017-05-21 15:20:51.971112", 2150], ["2017-05-21 15:42:55.281272", 2150], ["2017-05-21 15:42:55.282272", 2350], ["2017-05-21 17:15:56.026775", 2350], ["2017-05-21 17:15:56.027775", 2750], ["2017-05-21 17:31:05.215840", 2750], ["2017-05-21 17:31:05.216840", 3150], ["2017-05-21 17:58:08.255309", 3150], ["2017-05-21 17:58:08.256309", 3550], ["2017-05-21 19:15:04.810967", 3550], ["2017-05-21 19:15:04.811967", 3750], ["2017-05-22 00:13:08.153952", 3750], ["2017-05-22 00:13:08.154952", 3950], ["2017-05-22 02:47:54.129727", 3950], ["2017-05-22 02:47:54.130727", 4350], ["2017-05-22 03:50:46.214848", 4350], ["2017-05-22 03:50:46.215848", 4750], ["2017-05-22 14:15:38.174525", 4750], ["2017-05-22 14:15:38.175525", 5050], ["2017-05-22 15:14:51.213666", 5050], ["2017-05-22 15:14:51.214666", 5150], ["2017-05-22 16:19:10.704722", 5150], ["2017-05-22 16:19:10.705722", 5550], ["2017-05-22 18:16:17.473361", 5550], ["2017-05-22 18:16:17.474361", 5850], ["2017-05-22 20:28:58.104690", 5850], ["2017-05-22 20:28:58.105690", 6350], ["2017-05-22 23:15:23.667467", 6350], ["2017-05-22 23:15:23.668467", 6850], ["2017-05-22 23:55:48.899117", 6850], ["2017-05-22 23:55:48.900117", 7150], ["2017-05-25 17:15:53.280853", 7150], ["2017-05-25 17:15:53.281853", 7450], ["2017-05-25 21:42:17.315079", 7450], ["2017-05-25 21:42:17.316079", 7850], ["2017-05-27 06:10:42.937201", 7850], ["2017-05-27 06:10:42.938201", 8450], ["2017-05-27 12:03:20.091722", 8450], ["2017-05-27 12:03:20.092722", 8750], ["2017-05-27 16:08:42.505531", 8750]]], ["Overkill by default", [["2017-05-20 16:56:37.731393", 0], ["2017-05-20 16:56:37.732393", 50], ["2017-05-20 17:00:02.745067", 50], ["2017-05-20 17:00:02.746067", 150], ["2017-05-20 17:46:18.384188", 150], ["2017-05-20 17:46:18.385188", 250], ["2017-05-20 18:01:07.292866", 250], ["2017-05-20 18:01:07.293866", 450], ["2017-05-20 18:41:52.752545", 450], ["2017-05-20 18:41:52.753545", 750], ["2017-05-20 19:00:28.448036", 750], ["2017-05-20 19:00:28.449036", 850], ["2017-05-20 19:24:06.432815", 850], ["2017-05-20 19:24:06.433815", 950], ["2017-05-20 20:22:13.132683", 950], ["2017-05-20 20:22:13.133683", 1050], ["2017-05-20 20:33:34.428146", 1050], ["2017-05-20 20:33:34.429146", 1450], ["2017-05-20 20:53:43.300529", 1450], ["2017-05-20 20:53:43.301529", 1550], ["2017-05-20 21:06:34.846058", 1550], ["2017-05-20 21:06:34.847058", 1650], ["2017-05-20 22:18:39.869903", 1650], ["2017-05-20 22:18:39.870903", 1750], ["2017-05-21 00:44:49.934204", 1750], ["2017-05-21 00:44:49.935204", 1850], ["2017-05-21 01:06:33.194405", 1850], ["2017-05-21 01:06:33.195405", 2050], ["2017-05-21 03:58:11.401275", 2050], ["2017-05-21 03:58:11.402275", 2250], ["2017-05-21 04:16:37.884911", 2250], ["2017-05-21 04:16:37.885911", 2450], ["2017-05-21 04:52:28.111829", 2450], ["2017-05-21 04:52:28.112829", 2650], ["2017-05-21 21:39:04.917190", 2650], ["2017-05-21 21:39:04.918190", 2950], ["2017-05-21 23:56:52.213203", 2950], ["2017-05-21 23:56:52.214203", 3350], ["2017-05-22 02:03:03.562576", 3350], ["2017-05-22 02:03:03.563576", 3550], ["2017-05-22 06:09:15.342514", 3550], ["2017-05-22 06:09:15.343514", 3750], ["2017-05-22 08:01:25.332575", 3750], ["2017-05-22 08:01:25.333575", 4150], ["2017-05-22 17:35:08.637948", 4150], ["2017-05-22 17:35:08.638948", 4450], ["2017-05-22 22:03:56.489351", 4450], ["2017-05-22 22:03:56.490351", 4750], ["2017-05-23 00:43:55.562697", 4750], ["2017-05-23 00:43:55.563697", 5150], ["2017-05-23 10:35:14.465515", 5150], ["2017-05-23 10:35:14.466515", 5550], ["2017-05-23 23:30:53.235980", 5550], ["2017-05-23 23:30:53.236980", 5950], ["2017-05-25 00:06:12.320282", 5950], ["2017-05-25 00:06:12.321282", 6450], ["2017-05-25 16:35:55.315298", 6450], ["2017-05-25 16:35:55.316298", 6850], ["2017-05-26 03:01:16.924606", 6850], ["2017-05-26 03:01:16.925606", 7250], ["2017-05-26 19:38:41.187968", 7250], ["2017-05-26 19:38:41.188968", 7550], ["2017-05-26 20:14:00.509317", 7550], ["2017-05-26 20:14:00.510317", 8050], ["2017-05-27 16:08:42.509169", 8050]]], ["pentacontagons", [["2017-05-20 20:55:23.486965", 0], ["2017-05-20 20:55:23.487965", 50], ["2017-05-20 20:56:30.895516", 50], ["2017-05-20 20:56:30.896516", 150], ["2017-05-20 21:10:13.152707", 150], ["2017-05-20 21:10:13.153707", 250], ["2017-05-20 21:13:13.951314", 250], ["2017-05-20 21:13:13.952314", 350], ["2017-05-20 21:13:23.837194", 350], ["2017-05-20 21:13:23.838194", 450], ["2017-05-20 21:55:34.358821", 450], ["2017-05-20 21:55:34.359821", 650], ["2017-05-20 22:36:51.509197", 650], ["2017-05-20 22:36:51.510197", 850], ["2017-05-20 23:13:11.557542", 850], ["2017-05-20 23:13:11.558542", 1050], ["2017-05-20 23:13:41.399267", 1050], ["2017-05-20 23:13:41.400267", 1150], ["2017-05-20 23:20:53.269420", 1150], ["2017-05-20 23:20:53.270420", 1250], ["2017-05-20 23:24:07.287622", 1250], ["2017-05-20 23:24:07.288622", 1350], ["2017-05-20 23:31:32.712154", 1350], ["2017-05-20 23:31:32.713154", 1550], ["2017-05-20 23:44:43.977532", 1550], ["2017-05-20 23:44:43.978532", 1750], ["2017-05-20 23:50:11.144648", 1750], ["2017-05-20 23:50:11.145648", 2050], ["2017-05-21 01:44:43.503677", 2050], ["2017-05-21 01:44:43.504677", 2150], ["2017-05-21 04:17:59.417684", 2150], ["2017-05-21 04:17:59.418684", 2550], ["2017-05-21 15:52:31.495936", 2550], ["2017-05-21 15:52:31.496936", 2750], ["2017-05-21 16:11:06.789241", 2750], ["2017-05-21 16:11:06.790241", 3150], ["2017-05-21 18:04:11.760523", 3150], ["2017-05-21 18:04:11.761523", 3250], ["2017-05-21 20:10:20.717452", 3250], ["2017-05-21 20:10:20.718452", 3550], ["2017-05-21 20:38:19.263533", 3550], ["2017-05-21 20:38:19.264533", 3950], ["2017-05-21 21:18:34.097126", 3950], ["2017-05-21 21:18:34.098126", 4150], ["2017-05-21 21:42:29.235373", 4150], ["2017-05-21 21:42:29.236373", 4550], ["2017-05-22 12:29:21.509140", 4550], ["2017-05-22 12:29:21.510140", 4750], ["2017-05-22 14:24:24.515725", 4750], ["2017-05-22 14:24:24.516725", 5150], ["2017-05-22 21:11:35.666841", 5150], ["2017-05-22 21:11:35.667841", 5450], ["2017-05-22 21:56:31.040091", 5450], ["2017-05-22 21:56:31.041091", 5950], ["2017-05-23 14:03:29.660039", 5950], ["2017-05-23 14:03:29.661039", 6250], ["2017-05-24 01:12:52.751142", 6250], ["2017-05-24 01:12:52.752142", 6750], ["2017-05-25 01:36:28.316288", 6750], ["2017-05-25 01:36:28.317288", 7050], ["2017-05-25 03:32:14.852431", 7050], ["2017-05-25 03:32:14.853431", 7450], ["2017-05-26 00:15:26.434547", 7450], ["2017-05-26 00:15:26.435547", 7850], ["2017-05-27 16:08:42.512653", 7850]]], ["hsctf is cancer", [["2017-05-20 16:11:04.624942", 0], ["2017-05-20 16:11:04.625942", 100], ["2017-05-20 16:11:22.451199", 100], ["2017-05-20 16:11:22.452199", 150], ["2017-05-20 16:30:48.028073", 150], ["2017-05-20 16:30:48.029073", 250], ["2017-05-20 16:44:40.747081", 250], ["2017-05-20 16:44:40.748081", 350], ["2017-05-20 16:47:08.471461", 350], ["2017-05-20 16:47:08.472461", 450], ["2017-05-20 16:55:34.208508", 450], ["2017-05-20 16:55:34.209508", 650], ["2017-05-20 17:05:08.020101", 650], ["2017-05-20 17:05:08.021101", 850], ["2017-05-20 17:12:27.833743", 850], ["2017-05-20 17:12:27.834743", 1050], ["2017-05-20 17:13:16.139959", 1050], ["2017-05-20 17:13:16.140959", 1250], ["2017-05-20 17:30:46.751328", 1250], ["2017-05-20 17:30:46.752328", 1350], ["2017-05-20 17:37:38.578202", 1350], ["2017-05-20 17:37:38.579202", 1450], ["2017-05-20 19:51:26.864100", 1450], ["2017-05-20 19:51:26.865100", 1550], ["2017-05-21 03:16:16.002584", 1550], ["2017-05-21 03:16:16.003584", 1750], ["2017-05-21 03:26:51.291168", 1750], ["2017-05-21 03:26:51.292168", 1850], ["2017-05-21 03:53:23.916717", 1850], ["2017-05-21 03:53:23.917717", 1950], ["2017-05-21 15:13:06.778847", 1950], ["2017-05-21 15:13:06.779847", 2150], ["2017-05-21 15:35:59.317075", 2150], ["2017-05-21 15:35:59.318075", 2450], ["2017-05-21 16:05:00.078327", 2450], ["2017-05-21 16:05:00.079327", 2750], ["2017-05-21 16:10:12.165610", 2750], ["2017-05-21 16:10:12.166610", 3050], ["2017-05-21 16:14:26.667993", 3050], ["2017-05-21 16:14:26.668993", 3450], ["2017-05-21 16:29:21.763132", 3450], ["2017-05-21 16:29:21.764132", 3850], ["2017-05-21 16:37:35.454567", 3850], ["2017-05-21 16:37:35.455567", 4150], ["2017-05-21 17:01:17.858093", 4150], ["2017-05-21 17:01:17.859093", 4550], ["2017-05-21 17:08:50.089093", 4550], ["2017-05-21 17:08:50.090093", 4950], ["2017-05-21 17:08:57.634871", 4950], ["2017-05-21 17:08:57.635871", 5150], ["2017-05-21 17:32:27.085189", 5150], ["2017-05-21 17:32:27.086189", 5350], ["2017-05-21 21:28:16.769063", 5350], ["2017-05-21 21:28:16.770063", 5750], ["2017-05-21 23:03:35.161284", 5750], ["2017-05-21 23:03:35.162284", 6250], ["2017-05-22 23:14:39.259147", 6250], ["2017-05-22 23:14:39.260147", 6750], ["2017-05-26 15:34:59.289078", 6750], ["2017-05-26 15:34:59.290078", 7150], ["2017-05-26 15:50:51.233895", 7150], ["2017-05-26 15:50:51.234895", 7550], ["2017-05-27 16:08:42.516395", 7550]]], ["F0 0F C7 C8", [["2017-05-20 16:19:30.154713", 0], ["2017-05-20 16:19:30.155713", 50], ["2017-05-20 16:42:40.984750", 50], ["2017-05-20 16:42:40.985750", 150], ["2017-05-20 16:48:32.134824", 150], ["2017-05-20 16:48:32.135824", 350], ["2017-05-20 16:50:22.656377", 350], ["2017-05-20 16:50:22.657377", 450], ["2017-05-20 17:19:14.054295", 450], ["2017-05-20 17:19:14.055295", 550], ["2017-05-20 17:20:52.096376", 550], ["2017-05-20 17:20:52.097376", 650], ["2017-05-20 17:41:07.839546", 650], ["2017-05-20 17:41:07.840546", 750], ["2017-05-20 17:48:35.299116", 750], ["2017-05-20 17:48:35.300116", 950], ["2017-05-20 17:50:28.682364", 950], ["2017-05-20 17:50:28.683364", 1050], ["2017-05-20 18:03:22.013792", 1050], ["2017-05-20 18:03:22.014792", 1250], ["2017-05-20 18:34:32.254159", 1250], ["2017-05-20 18:34:32.255159", 1550], ["2017-05-20 18:42:49.497966", 1550], ["2017-05-20 18:42:49.498966", 1950], ["2017-05-20 19:09:59.877279", 1950], ["2017-05-20 19:09:59.878279", 2050], ["2017-05-20 19:50:15.384417", 2050], ["2017-05-20 19:50:15.385417", 2250], ["2017-05-20 20:23:37.148273", 2250], ["2017-05-20 20:23:37.149273", 2450], ["2017-05-20 22:03:58.603417", 2450], ["2017-05-20 22:03:58.604417", 2850], ["2017-05-20 22:43:41.303616", 2850], ["2017-05-20 22:43:41.304616", 3250], ["2017-05-21 00:02:18.677607", 3250], ["2017-05-21 00:02:18.678607", 3550], ["2017-05-21 02:00:50.140721", 3550], ["2017-05-21 02:00:50.141721", 3750], ["2017-05-21 18:09:58.190532", 3750], ["2017-05-21 18:09:58.191532", 3950], ["2017-05-21 21:54:28.472947", 3950], ["2017-05-21 21:54:28.473947", 4350], ["2017-05-22 01:26:42.753685", 4350], ["2017-05-22 01:26:42.754685", 4750], ["2017-05-22 04:12:23.259203", 4750], ["2017-05-22 04:12:23.260203", 5250], ["2017-05-22 17:14:42.018412", 5250], ["2017-05-22 17:14:42.019412", 5550], ["2017-05-22 20:14:31.485483", 5550], ["2017-05-22 20:14:31.486483", 5850], ["2017-05-23 13:40:08.559392", 5850], ["2017-05-23 13:40:08.560392", 5950], ["2017-05-24 03:25:22.211153", 5950], ["2017-05-24 03:25:22.212153", 6450], ["2017-05-24 19:45:04.520938", 6450], ["2017-05-24 19:45:04.521938", 6650], ["2017-05-25 18:57:04.445108", 6650], ["2017-05-25 18:57:04.446108", 7050], ["2017-05-26 00:20:38.415227", 7050], ["2017-05-26 00:20:38.416227", 7450], ["2017-05-27 16:08:42.519890", 7450]]], ["Diesel Locomotive", [["2017-05-21 22:14:03.613208", 0], ["2017-05-21 22:14:03.614208", 50], ["2017-05-21 22:15:58.994543", 50], ["2017-05-21 22:15:58.995543", 150], ["2017-05-21 22:38:09.268924", 150], ["2017-05-21 22:38:09.269924", 250], ["2017-05-21 23:03:15.284284", 250], ["2017-05-21 23:03:15.285284", 350], ["2017-05-21 23:50:22.510338", 350], ["2017-05-21 23:50:22.511338", 750], ["2017-05-22 02:18:05.955014", 750], ["2017-05-22 02:18:05.956014", 1150], ["2017-05-22 02:30:09.602460", 1150], ["2017-05-22 02:30:09.603460", 1550], ["2017-05-22 03:13:15.326276", 1550], ["2017-05-22 03:13:15.327276", 1850], ["2017-05-22 21:51:45.553509", 1850], ["2017-05-22 21:51:45.554509", 1950], ["2017-05-22 21:57:29.585122", 1950], ["2017-05-22 21:57:29.586122", 2150], ["2017-05-22 22:04:52.038747", 2150], ["2017-05-22 22:04:52.039747", 2350], ["2017-05-22 22:08:02.365229", 2350], ["2017-05-22 22:08:02.366229", 2450], ["2017-05-22 22:11:16.406210", 2450], ["2017-05-22 22:11:16.407210", 2650], ["2017-05-22 22:23:15.895226", 2650], ["2017-05-22 22:23:15.896226", 2750], ["2017-05-22 22:31:12.958248", 2750], ["2017-05-22 22:31:12.959248", 2950], ["2017-05-22 22:58:07.422111", 2950], ["2017-05-22 22:58:07.423111", 3150], ["2017-05-23 00:25:28.212663", 3150], ["2017-05-23 00:25:28.213663", 3450], ["2017-05-23 00:57:22.521100", 3450], ["2017-05-23 00:57:22.522100", 3850], ["2017-05-23 02:16:22.147509", 3850], ["2017-05-23 02:16:22.148509", 3950], ["2017-05-23 22:48:45.067413", 3950], ["2017-05-23 22:48:45.068413", 4150], ["2017-05-23 23:47:13.508321", 4150], ["2017-05-23 23:47:13.509321", 4450], ["2017-05-24 00:26:20.864592", 4450], ["2017-05-24 00:26:20.865592", 4550], ["2017-05-24 00:52:33.515959", 4550], ["2017-05-24 00:52:33.516959", 4750], ["2017-05-25 14:56:29.451169", 4750], ["2017-05-25 14:56:29.452169", 5150], ["2017-05-25 21:44:02.788474", 5150], ["2017-05-25 21:44:02.789474", 5550], ["2017-05-27 00:43:26.546516", 5550], ["2017-05-27 00:43:26.547516", 5750], ["2017-05-27 02:13:45.975309", 5750], ["2017-05-27 02:13:45.976309", 6050], ["2017-05-27 04:12:15.604930", 6050], ["2017-05-27 04:12:15.605930", 6550], ["2017-05-27 05:31:46.712182", 6550], ["2017-05-27 05:31:46.713182", 6950], ["2017-05-27 16:08:42.523317", 6950]]], ["SFHS Team C", [["2017-05-21 13:15:54.806861", 0], ["2017-05-21 13:15:54.807861", 50], ["2017-05-21 13:28:17.256858", 50], ["2017-05-21 13:28:17.257858", 150], ["2017-05-21 13:31:01.064954", 150], ["2017-05-21 13:31:01.065954", 250], ["2017-05-21 16:27:59.768736", 250], ["2017-05-21 16:27:59.769736", 350], ["2017-05-21 16:31:31.807248", 350], ["2017-05-21 16:31:31.808248", 450], ["2017-05-21 16:34:18.427570", 450], ["2017-05-21 16:34:18.428570", 550], ["2017-05-21 16:37:10.234848", 550], ["2017-05-21 16:37:10.235848", 750], ["2017-05-21 16:38:30.343672", 750], ["2017-05-21 16:38:30.344672", 950], ["2017-05-21 22:48:25.617903", 950], ["2017-05-21 22:48:25.618903", 1150], ["2017-05-21 23:47:50.684025", 1150], ["2017-05-21 23:47:50.685025", 1450], ["2017-05-22 15:39:42.404740", 1450], ["2017-05-22 15:39:42.405740", 1850], ["2017-05-22 15:53:57.520249", 1850], ["2017-05-22 15:53:57.521249", 2150], ["2017-05-22 17:46:37.952029", 2150], ["2017-05-22 17:46:37.953029", 2550], ["2017-05-22 21:18:09.894685", 2550], ["2017-05-22 21:18:09.895685", 2750], ["2017-05-22 21:35:48.280620", 2750], ["2017-05-22 21:35:48.281620", 3050], ["2017-05-22 22:11:36.749012", 3050], ["2017-05-22 22:11:36.750012", 3250], ["2017-05-22 22:39:00.112661", 3250], ["2017-05-22 22:39:00.113661", 3450], ["2017-05-22 22:40:36.458980", 3450], ["2017-05-22 22:40:36.459980", 3550], ["2017-05-22 23:07:51.090582", 3550], ["2017-05-22 23:07:51.091582", 3650], ["2017-05-23 01:21:09.329647", 3650], ["2017-05-23 01:21:09.330647", 4050], ["2017-05-23 15:17:10.890335", 4050], ["2017-05-23 15:17:10.891335", 4350], ["2017-05-23 18:06:54.791801", 4350], ["2017-05-23 18:06:54.792801", 4750], ["2017-05-23 21:55:13.201505", 4750], ["2017-05-23 21:55:13.202505", 5150], ["2017-05-23 22:35:57.560715", 5150], ["2017-05-23 22:35:57.561715", 5350], ["2017-05-25 18:44:01.429768", 5350], ["2017-05-25 18:44:01.430768", 5450], ["2017-05-25 20:45:23.179206", 5450], ["2017-05-25 20:45:23.180206", 5850], ["2017-05-26 03:23:29.085117", 5850], ["2017-05-26 03:23:29.086117", 6250], ["2017-05-26 19:28:06.229913", 6250], ["2017-05-26 19:28:06.230913", 6550], ["2017-05-26 20:01:34.223023", 6550], ["2017-05-26 20:01:34.224023", 6750], ["2017-05-26 21:14:58.724984", 6750], ["2017-05-26 21:14:58.725984", 6850], ["2017-05-27 16:08:42.526879", 6850]]], ["Y33t", [["2017-05-23 16:26:39.714771", 0], ["2017-05-23 16:26:39.715771", 50], ["2017-05-23 16:35:00.998358", 50], ["2017-05-23 16:35:00.999358", 150], ["2017-05-23 16:42:50.690295", 150], ["2017-05-23 16:42:50.691295", 250], ["2017-05-23 18:20:18.393305", 250], ["2017-05-23 18:20:18.394305", 350], ["2017-05-23 18:21:13.793636", 350], ["2017-05-23 18:21:13.794636", 450], ["2017-05-23 18:46:45.262086", 450], ["2017-05-23 18:46:45.263086", 550], ["2017-05-23 18:53:10.910582", 550], ["2017-05-23 18:53:10.911582", 650], ["2017-05-23 19:40:04.086960", 650], ["2017-05-23 19:40:04.087960", 750], ["2017-05-23 20:08:10.506137", 750], ["2017-05-23 20:08:10.507137", 950], ["2017-05-23 20:21:54.341395", 950], ["2017-05-23 20:21:54.342395", 1150], ["2017-05-23 21:07:57.571375", 1150], ["2017-05-23 21:07:57.572375", 1350], ["2017-05-23 21:55:54.624155", 1350], ["2017-05-23 21:55:54.625155", 1750], ["2017-05-23 23:30:38.462230", 1750], ["2017-05-23 23:30:38.463230", 2150], ["2017-05-24 00:36:22.300636", 2150], ["2017-05-24 00:36:22.301636", 2350], ["2017-05-24 00:55:03.088371", 2350], ["2017-05-24 00:55:03.089371", 2650], ["2017-05-24 03:22:38.100978", 2650], ["2017-05-24 03:22:38.101978", 2850], ["2017-05-24 05:08:15.397013", 2850], ["2017-05-24 05:08:15.398013", 3250], ["2017-05-24 06:05:59.274800", 3250], ["2017-05-24 06:05:59.275800", 3450], ["2017-05-24 06:46:00.919639", 3450], ["2017-05-24 06:46:00.920639", 3750], ["2017-05-24 07:52:44.421829", 3750], ["2017-05-24 07:52:44.422829", 3950], ["2017-05-24 14:42:47.268363", 3950], ["2017-05-24 14:42:47.269363", 4250], ["2017-05-24 15:40:20.819051", 4250], ["2017-05-24 15:40:20.820051", 4650], ["2017-05-24 23:17:19.760931", 4650], ["2017-05-24 23:17:19.761931", 4950], ["2017-05-25 03:36:50.063843", 4950], ["2017-05-25 03:36:50.064843", 5350], ["2017-05-26 04:53:11.300818", 5350], ["2017-05-26 04:53:11.301818", 5750], ["2017-05-26 06:00:43.965187", 5750], ["2017-05-26 06:00:43.966187", 6150], ["2017-05-26 20:45:15.186899", 6150], ["2017-05-26 20:45:15.187899", 6650], ["2017-05-27 15:54:22.427309", 6650], ["2017-05-27 15:54:22.428309", 6850], ["2017-05-27 16:08:42.530476", 6850]]]];
+			var groupn = 0;
+			var groups = new vis.DataSet();
+			var items = [];
+			graphData.forEach(function(team) {
+				var teamName = team[0];
+				var scoreEvents = team[1];
+				groups.add({ id: groupn, content: teamName.replace("<", "&lt;").replace(">", "&gt;"), options: { drawPoints: false, interpolation: false } });
+				scoreEvents.forEach(function(evt) {
+					items.push({ x: evt[0], y: evt[1], group: groupn });
+				});
+				groupn++;
+			});
+			var dataset = new vis.DataSet(items);
+			var graph = new vis.Graph2d(document.getElementById('chart'), dataset, groups, {legend: true, dataAxis: {left: {range: {min: 0}}}, showCurrentTime: false});
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-99739522-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+		<div class="hiddendiv common"></div><div class="drag-target" style="left: 0px; touch-action: none;"></div>
+	</body>
+</html>
